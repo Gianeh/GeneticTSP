@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <random>
 #include <chrono>
+#include <fstream>
+#include <sstream>
 
 // Solution class, basically the single genome/path of the TSP problem
 // using the Krolak datasets require modeling cities as pairs of doubles - future datasets may require distance matrices or graphs
@@ -37,14 +39,7 @@ class TSPSolution {
             // print the total distance of the path
             std::cout << "Total distance: " << calculateTotalDistance() << std::endl;
         }
-        double calculateTotalDistance() const {
-            double totalDistance = 0.0;
-            for (int i = 0; i < path.size() - 1; ++i) {
-                totalDistance += calculateDistance(path[i], path[i + 1]);
-            }
-            totalDistance += calculateDistance(path.back(), path.front());
-            return totalDistance;
-        }
+        
 
     private:
         //std::vector<std::pair<double, double>> cities;
@@ -54,7 +49,14 @@ class TSPSolution {
             double dy = city1.second - city2.second;
             return std::sqrt(dx * dx + dy * dy);
         }
-        
+        double calculateTotalDistance() const {
+            double totalDistance = 0.0;
+            for (int i = 0; i < path.size() - 1; ++i) {
+                totalDistance += calculateDistance(path[i], path[i + 1]);
+            }
+            totalDistance += calculateDistance(path.back(), path.front());
+            return totalDistance;
+        }
 
         
 };
@@ -99,6 +101,9 @@ class Population {
             int optOrCount = (int)(populationSize * optOrRate / 100);
             //std::cout << "OptOr count: " << optOrCount << std::endl;
             optOr(crossoverCount + opt2Count + 1, optOrCount);
+
+            // Copy the new generation to the current generation
+            genomes = newGenomes;
 
             return;
         }
@@ -174,25 +179,11 @@ class Population {
                 }
                 // Keep the best parent based on the fitness function
                 TSPSolution bestParent = parents.first.calculateFitness() >= parents.second.calculateFitness() ? parents.first : parents.second;
-                // Make parent decision explicit
-                /*
-                std::cout << "Best parent: " << std::endl;
-                bestParent.printSolution();
-                // among the two
-                std::cout << "Parents: " << std::endl;
-                parents.first.printSolution();
-                parents.second.printSolution();
-                */
                 TSPSolution child(path);
 
                 // Add to the new generation
                 newGenomes.push_back(child);
                 newGenomes.push_back(bestParent);
-            }
-
-            // Add the new generation to the population
-            for (int i = 0; i < crossoverCount; i++){
-                genomes[i] = newGenomes[i];
             }
         }
 
@@ -211,22 +202,24 @@ class Population {
         the new paths between cities a, c and cities b, d.
         */
         void opt2(int startIndex, int opt2Count){
-            for (auto& genome : genomes) {
+            for (int g = startIndex + 1; g < opt2Count; g++) {
                 // for ten times pick two pairs of adjacent cities on the tour
+                std::vector<std::pair<double,double>> path = genomes[g].getPath();
                 for (int i = 0; i < 10; i++){
                     // generate two random indices
-                    int a = rand() % genome.getPath().size()-1; // -1 to avoid the last city
+                    int a = rand() % (path.size()-2); // -2 to avoid the last city
                     int b = a+1;
-                    int c = rand() % genome.getPath().size()-1;
-                    int d = c+1;
+                    int c = rand() % (path.size()-2);
                     // make sure c != a, a+1, a-1
                     while (c == a || c == a+1 || c == a-1){
-                        c = rand() % genome.getPath().size()-1;
+                        c = rand() % (path.size()-2);
                     }
-                    std::pair<double,double> cityA = genome.getPath()[a];
-                    std::pair<double,double> cityB = genome.getPath()[b];
-                    std::pair<double,double> cityC = genome.getPath()[c];
-                    std::pair<double,double> cityD = genome.getPath()[d];
+                    int d = c+1;
+
+                    std::pair<double,double> cityA = path[a];
+                    std::pair<double,double> cityB = path[b];
+                    std::pair<double,double> cityC = path[c];
+                    std::pair<double,double> cityD = path[d];
                     // calculate the distances
                     double ab = calculateDistance(cityA, cityB);
                     double cd = calculateDistance(cityC, cityD);
@@ -235,22 +228,29 @@ class Population {
                     // if dab + dcd > dac, + dbd, then the paths between cities a, b and cities c, d on the tour are removed and replaced by the new paths between cities a, c and cities b, d.
                     if (ab + cd >= ac + bd){
                         //get the min and max indeces into wich we have to flip the cities
-                        std::vector<int> path = {a, b, c, d};
-                        minind=path[0];
-                        maxind=path[0];
-                        for(i=0;i<path.size();i++){
-                            if(path[i] < minind){
-                                minind=path[i];
+                        /*
+                        std::vector<int> subPath = {a, b, c, d};
+                        int minind = subPath[0];
+                        int maxind = subPath[0];
+                        for(i = 0; i < subPath.size(); i++){
+                            if(subPath[i] < minind){
+                                minind=subPath[i];
                             }
-                            else if(path[i] > maxind){
-                                maxind=path[i];
+                            else if(subPath[i] > maxind){
+                                maxind=subPath[i];
                             }
                         }
                         //flip the cities
-                        genome.flip(minind,maxind);
+                        std::reverse(path.begin() + minind + 1, path.begin() + maxind);
+                        */
+                        std::pair<double,double> temp = path[b];
+                        path[b] = path[c];
+                        path[c] = temp;
+                        
                     }
-
                 }
+                TSPSolution child(path);
+                newGenomes.push_back(child);
             }
         }
 
@@ -269,19 +269,22 @@ class Population {
             bestSolution.printSolution();
         }
 
+        TSPSolution getBestSolution() {
+            // Sort the genomes based on their fitness and print the best solution
+            TSPSolution bestSolution = genomes[0];
+            for (auto& genome : genomes) {
+                if (genome.calculateFitness() > bestSolution.calculateFitness()) {
+                    bestSolution = genome;
+                }
+            }
+            return bestSolution;
+        }
         void printInfo() {
             std::cout << "Population size: " << populationSize << std::endl;
             std::cout << "Crossover rate: " << crossoverRate << std::endl;
             std::cout << "Opt2 rate: " << opt2Rate << std::endl;
             std::cout << "OptOr rate: " << optOrRate << std::endl;
         }
-        
-        void print() {
-            for (auto& genome : genomes) {
-                std::cout << genome.calculateTotalDistance() << std::endl;
-            }
-        }
-
 
     private:
         int populationSize;
@@ -300,23 +303,66 @@ class Population {
         
 };
 
+std::vector<std::pair<double, double>> parseCoordinates(const std::string& filename) {
+    std::vector<std::pair<double, double>> coordinates;
+    std::ifstream input_file(filename);
+    if (!input_file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return coordinates;
+    }
+
+    std::string line;
+    while (std::getline(input_file, line)) {
+        std::istringstream ss(line);
+        double x, y;
+        if (ss >> x >> y) {
+            coordinates.push_back({x, y});
+        } else {
+            std::cerr << "Error parsing line: " << line << std::endl;
+        }
+    }
+
+    input_file.close();
+    return coordinates;
+}
+
+
 
 int main(){
     srand(42);
     // 11 cities:    
-    std::vector<std::pair<double, double>> cities = {{0.0, 0.0}, {1.0, 2.0}, {3.0, 1.0}, {4.0, 3.0}, {2.0, 4.0}, {5.0, 2.0}, {6.0, 3.0}, {7.0, 1.0}, {8.0, 4.0}, {9.0, 0.0}, {10.0, 2.0}};
+    //std::vector<std::pair<double, double>> cities = {{0.0, 0.0}, {1.0, 2.0}, {3.0, 1.0}, {4.0, 3.0}, {2.0, 4.0}, {5.0, 2.0}, {6.0, 3.0}, {7.0, 1.0}, {8.0, 4.0}, {9.0, 0.0}, {10.0, 2.0}};
     // optimal distance: 25.879248604912885
-    Population population(100, cities, 100.0, 0.0, 0.0);
+    
+    // 13 cities:
+    //std::vector<std::pair<double, double>> cities = {{0.5, 3.0}, {6.0, 2.0}, {7.3, 2.0}, {12.0, 4.0}, {3.0, 5.0}, {5.0, 10.0}, {5.0, 12.0}, {5.0, 0.0}, {9.0, 4.0}, {15.0, 13.0}, {10.0, 2.0}, {11.0, 3.0}, {12.0, 1.0}};
+    // optimal distance: 48.56695256837755  -  Source = ?
+
+    // Krolak A:
+    std::vector<std::pair<double, double>> cities = parseCoordinates("krolak_coords.txt");
+    //optimal distance: 21282
+
+    Population population(50, cities, 50.0, 50.0, 0.0);
     // Print algorithm information and initiate the genetic search
     std::cout << "Initiating Genetic search:" << std::endl;
     //population.printInfo();
-    for (int i = 0; i < 100; ++i) {
-        population.evolve();
+    for (int i = 0; i < 7000; ++i) {
         std::cout << "\t\t\t\tGeneration: " << i+1 << std::endl;
+        population.evolve();
         //std::cout << "all the genomes in the population:" << std::endl;
         //population.print();
         population.printBestSolution();
     }
+
+    // print the best solution in a file
+        std::ofstream output_file("best_solution.txt");
+        std::vector<std::pair<double,double>> bestSolution = population.getBestSolution().getPath();
+        for (auto& city : bestSolution) {
+            output_file << city.first << " " << city.second << std::endl;
+        }
+        output_file << bestSolution[0].first << " " << bestSolution[0].second << std::endl;
+        output_file.close();
+
     return 0;
 
 }
