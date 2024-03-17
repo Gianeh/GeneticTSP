@@ -232,8 +232,23 @@ class Population {
                     double cd = calculateDistance(cityC, cityD);
                     double ac = calculateDistance(cityA, cityC);
                     double bd = calculateDistance(cityB, cityD);  
-                    // if dab + dcd > d, + dbd, then the paths between cities a, b and cities c, d on the tour are removed and replaced by the new paths between cities a, c and cities b, d.
-
+                    // if dab + dcd > dac, + dbd, then the paths between cities a, b and cities c, d on the tour are removed and replaced by the new paths between cities a, c and cities b, d.
+                    if (ab + cd >= ac + bd){
+                        //get the min and max indeces into wich we have to flip the cities
+                        std::vector<int> path = {a, b, c, d};
+                        minind=path[0];
+                        maxind=path[0];
+                        for(i=0;i<path.size();i++){
+                            if(path[i] < minind){
+                                minind=path[i];
+                            }
+                            else if(path[i] > maxind){
+                                maxind=path[i];
+                            }
+                        }
+                        //flip the cities
+                        genome.flip(minind,maxind);
+                    }
 
                 }
             }
