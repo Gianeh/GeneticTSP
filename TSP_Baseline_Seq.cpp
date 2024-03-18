@@ -73,9 +73,9 @@ class Population {
         populationSize(population_size), crossoverRate(crossover_rate), opt2Rate(opt_2_rate), optOrRate(opt_or_rate) {
             // Initialize the population with random paths
             for (int i = 0; i < populationSize; ++i) {
-                TSPSolution path(cities);
-                path.shufflePath();
-                genomes.push_back(path);
+                TSPSolution genome(cities);
+                genome.shufflePath();
+                genomes.push_back(genome);
             }
         }
 
@@ -86,6 +86,20 @@ class Population {
 
             // Population is shuffled to avoid picking always the same genomes for crossover or mutation
             std::random_shuffle(genomes.begin(), genomes.end());
+
+            // attempt 1:
+            // save the 2 best genomes from the previous generation before applying the genetic operations (with paper parameters there would be no guarantee that the best genome would be selected for crossover and thus saved)
+            TSPSolution bestSolution = genomes[0];
+            TSPSolution secondBestSolution = genomes[1];
+            for (auto& genome : genomes) {
+                if (genome.calculateFitness() > bestSolution.calculateFitness()) {
+                    secondBestSolution = bestSolution;
+                    bestSolution = genome;
+                }
+            }
+            newGenomes.push_back(bestSolution);
+            newGenomes.push_back(secondBestSolution);
+            // NOTE: DOING SO, THE TWO LAST EDITED (THROUGH CROSSOVER OR ONE OF THE OPT-MUTATIONS) GENOMES WON'T BE ADDED TO THE NEW GENERATION
 
             // crossover_rate% of the population is selected for crossover
             int crossoverCount = (int)(populationSize * crossoverRate / 100);
@@ -103,7 +117,10 @@ class Population {
             optOr(crossoverCount + opt2Count + 1, optOrCount);
 
             // Copy the new generation to the current generation
-            genomes = newGenomes;
+            //genomes = newGenomes;
+            for (int i = 0; i < newGenomes.size(); i++){
+                genomes[i] = newGenomes[i];
+            }
 
             return;
         }
@@ -202,6 +219,7 @@ class Population {
         the new paths between cities a, c and cities b, d.
         */
         void opt2(int startIndex, int opt2Count){
+
             for (int g = startIndex + 1; g < opt2Count; g++) {
                 // for ten times pick two pairs of adjacent cities on the tour
                 std::vector<std::pair<double,double>> path = genomes[g].getPath();
@@ -249,6 +267,7 @@ class Population {
                         
                     }
                 }
+                std::random_shuffle(path.begin() + 1, path.end());
                 TSPSolution child(path);
                 newGenomes.push_back(child);
             }
@@ -342,16 +361,32 @@ int main(){
     std::vector<std::pair<double, double>> cities = parseCoordinates("krolak_coords.txt");
     //optimal distance: 21282
 
-    Population population(50, cities, 50.0, 50.0, 0.0);
+    Population population(50, cities, 20.0, 80.0, 0.0);
     // Print algorithm information and initiate the genetic search
     std::cout << "Initiating Genetic search:" << std::endl;
     //population.printInfo();
-    for (int i = 0; i < 7000; ++i) {
+
+    // stop condition: 100000 generations or fitness doesn't improve for 1000 generations
+    int localOptimum = 0;
+    double prevBestFitness = 0.0;
+    for (int i = 0; i < 100000; ++i) {
         std::cout << "\t\t\t\tGeneration: " << i+1 << std::endl;
         population.evolve();
         //std::cout << "all the genomes in the population:" << std::endl;
         //population.print();
         population.printBestSolution();
+        double bestFitness = population.getBestSolution().calculateFitness();
+        if (bestFitness == prevBestFitness){
+            localOptimum++;
+            prevBestFitness = bestFitness;
+        }
+        else{
+            localOptimum = 0;
+        }
+        if (localOptimum == 1000){
+            std::cerr << "Local optimum reached, stopping the search after " << i+1 << " generations." << std::endl;
+            break;
+        }
     }
 
     // print the best solution in a file
