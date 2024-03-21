@@ -5,11 +5,15 @@
 #include <curand.h>
 #include <curand_kernel.h>
 
-#define pathSize 31		// dataset size in number of coordinates
-#define popSize 320		// population size
-#define ThreadNum 50	// ThreadNum * BlockNum must be equal to popSize -> when possible, the granularity reaches the chromosome level -> we need enough threads
-#define BlockNum 2
-#define subPopSize 32	// popSize must be a multiple of this and this should be a multiple of the warp size (32)
+#define pathSize 31				// dataset size in number of coordinates
+#define popSize 320				// population size
+#define subPopSize 32			// popSize must be a multiple of this and this should be a multiple of the warp size (32)
+#define selectionThreshold 0.5	// the threshold (%) for the selection of the best chromosomes in the sub-populations
+
+// CROSSOVER CONTROL PARAMETERS
+#define alpha 0.2	// environment advantage
+#define beta 0.7	// base hospitality
+// The probability that a crossover happens on a certain island is in the range [alpha/(popSize/subPopSize) + beta , alpha + beta] - a minimum of beta is granted for each island
 
 // A general debug error for cuda
 void checkCUDAError(const char *msg = NULL) {
@@ -20,7 +24,6 @@ void checkCUDAError(const char *msg = NULL) {
         // Additional error handling if needed
     }
 }
-
 
 // Device function to shuffle the chromosomes in the given portion of the population
 __device__ void device_random_shuffle(int *chromosome, int thread){
@@ -43,7 +46,7 @@ __global__ void random_shuffle(int *population){
 	device_random_shuffle(population+index, thread);
 }
 
-
+// Calculate the distance of a chromosome - TSP solution
 __device__ double device_calculate_distance(int *chromosome, double *distance_matrix){
 	double distance = 0.0;
 	for (int i = 0; i < pathSize-1; i++){
@@ -70,6 +73,7 @@ __global__ void parallel_swap(int *population, int i, int j){
 	population[i*pathSize+index] = population[j*pathSize+index];
 	population[j*pathSize+index] = temp;
 }
+
 
 __device__ void device_fit_sort_subpop(int* sub_population, double* sub_population_fitness){
 	// other algorithms could be employed to narrow the granularity but bubblesort should do it's job on a small enough subpopulation
@@ -101,11 +105,38 @@ __device__ void device_fit_sort_subpop(int* sub_population, double* sub_populati
 
 }
 
-// Sort a subpopulation on the granularity of subpopulation
-__global__ void fit_sort_subpop(int *population, double *population_fitness){
-	int fitness_index = threadIdx.x * subPopSize;	// index of the first fitness of each subpopulation
+// Selection of the best chromosomes in the subpopulations - in practice, to emulate the fact that only the fittest get a chance to reproduce, who is less than selectionThreshold% of the best is overwritten
+__device__ void device_selection(int *sub_population, double *sub_population_fitness){
+	// substitute the last selectionThreshold% of the population with the first part of the population, like: [11,8,7,5,4,3,2,1,0,-1] t = 30% -> [11,8,7,5,4,3,2,7,8,11]
+	// define first selectionThreshold% of the population
+	int threshold = (int)subPopSize * selectionThreshold;
+	for (int i = 0 ; i < subPopSize; i++){
+		sub_population[i] = sub_population[subPopSize-i];
+		for(int j = 0; j < pathSize; j++){
+			sub_population[i*pathSize+j] = sub_population[(subPopSize-i)*pathSize+j];
+		}
+	}
+}
+
+
+__device__ void device_crossover(int *sub_population, double *sub_population_distances){
+	// for this subpopulation define the crossover rate
+	double crossover_rate = (alpha * (threadIdx.x+1))/(popSize/subPopSize) + beta;
+}
+
+
+__global__ void genetic_step(int *population, double *population_fitness, double *population_distances){
+	int fitness_index = threadIdx.x * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
 	int sub_pop_index = threadIdx.x * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
+	// Sort the subpopulation
 	device_fit_sort_subpop(population+sub_pop_index, population_fitness+fitness_index);
+	// Selection
+	device_selection(population+sub_pop_index, population_fitness+fitness_index);
+	// Crossover
+	device_crossover(population+sub_pop_index, population_distances+fitness_index);
+	// Mutation
+	// Migration
+	// Next generation
 }
 
 // Helper function to load data from file
@@ -233,42 +264,9 @@ int main(){
 
 	// THE FOLLOWING ASSIGNMENT SHOULD BE DETERMINED A POSTERIORI OF AN INSPECTION OF THE DEVICE BASED ON CERTAIN CRITERIONS...
 	while(true /*stop criterion*/){
-		// Sort each sub-population - this can only be done on the granularity of subpopulation, hence it's outside of the genetic step GA
-		fit_sort_subpop<<<s_grid,s_block>>>(gpu_population, gpu_population_fitness);
-		// Check for any errors launching the kernel
-		checkCUDAError("fit_sort_subpop kernel launch");
-		break;
+		// Execute the GA steps
+		genetic_step<<<s_grid,s_block>>>(gpu_population, gpu_population_fitness, gpu_population_distances);
 	}
-	cudaDeviceSynchronize();
-	// Copy back to RAM the gpu_population onto the population pointer
-	cudaMemcpy(population, gpu_population, pathSize*popSize*sizeof(int), cudaMemcpyDeviceToHost);
-	// copy fitness and distances
-	cudaMemcpy(population_fitness, gpu_population_fitness, popSize*sizeof(double), cudaMemcpyDeviceToHost);
-
-	// as a test print a sub-population with fitness values for each chromosome
-	for (int f=0;f<subPopSize;f++){
-		printf("Fitness: %f\t", population_fitness[f]);
-		for (int i=0;i<pathSize;i++){
-			printf("%d ",population[f*pathSize+i]);
-			if((i+1)%pathSize==0){
-				printf("\n");
-			}
-		}
-	}
-	
-
-
-	// As a test print the shuffled population
-    // Copy back to RAM the gpu_population onto the population pointer
-	// cudaMemcpy(population,gpu_population,pathSize*popSize*sizeof(int),cudaMemcpyDeviceToHost);
-	// as a test print population
-	// for (int i=0;i<popSize*pathSize;i++){
-	// 	printf("%d ",population[i]);
-	// 	if((i+1)%pathSize==0){
-	// 		printf("\n");
-	// 	}
-	// }
-
 
 
 	return 0;
