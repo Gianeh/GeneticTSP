@@ -1,0 +1,19 @@
+Average speed:
+    Measure the average total time elapsed on N runs of the algorithm.
+    Measure the average inter-generation time elapsed on N runs of the algorithm.
+
+    N runs per executable: 5
+    generations: 100
+    population size: 128 - 1024 - 8192 - 65536 - 524288
+
+    Executables:
+        cuda:
+            tpb: 32 - 64
+        single_core:
+            threads: 1
+        multi_core:
+            thread: 16
+        threadpool:
+            threads: 16
+        openmp:
+            threads: 16

@@ -6,12 +6,12 @@
 #include <time.h>
 #include <unistd.h>
 
-#define generations 2		// number of generations
+#define generations 100		// number of generations
 
-#define threadsPerBlock 640		// number of threads per block
+#define threadsPerBlock 8		// number of threads per block
 
 #define pathSize 48				// dataset size in number of coordinates
-#define popSize 737280				// population size
+#define popSize 640000				// population size
 #define subPopSize 32				// popSize must be a multiple of this and this should be a multiple of the warp size (32)
 #define selectionThreshold 0.7		// the threshold (%) for the selection of the best chromosomes in the sub-populations
 #define migrationAttemptDelay 10	// the number of generations before a migration attempt is made
@@ -86,7 +86,6 @@ __global__ void parallel_swap(int *population, int i, int j){
 	population[i*pathSize+index] = population[j*pathSize+index];
 	population[j*pathSize+index] = temp;
 }
-
 
 __device__ void device_fit_sort_subpop(int* sub_population, double* sub_population_fitness){
 	// other algorithms could be employed to narrow the granularity but bubblesort should do it's job on a small enough subpopulation
@@ -204,13 +203,6 @@ __device__ void device_distance_crossover(int *parent1, int *parent2, int *offsp
 __device__ void device_crossover(int *sub_population, double *distance_matrix){
 	// for this subpopulation define the crossover rate
 	double crossover_rate = (alpha * (blockIdx.x+1))/(popSize/subPopSize) + beta;
-
-	// in case of odd number of selected chromosomes (i.e. top x%) shuffle the first of the non-selected chromosomes
-	/*
-	if (int(subPopSize*selectionThreshold) % 2 == 1){
-		device_random_shuffle(sub_population+(int(subPopSize*selectionThreshold)*pathSize), threadIdx.x);	// Ghost parent!
-	}
-	*/
 	
 	// init the random seed
 	curandState state;
@@ -250,14 +242,10 @@ __device__ void device_crossover(int *sub_population, double *distance_matrix){
 		}
 		i += 2;	// move to the next pair of chromosomes
 	}
+	//printf("Crossover completed on thread: %d\n", blockIdx.x * threadsPerBlock + threadIdx.x);
 }
 
-
 __global__ void genetic_step(int *population, double *population_fitness, double *distance_matrix){
-	//int fitness_index = threadIdx.x * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
-	//int sub_pop_index = threadIdx.x * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
-	//int fitness_index = blockIdx.x * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
-	//int sub_pop_index = blockIdx.x * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
 	int fitness_index = (blockIdx.x * threadsPerBlock + threadIdx.x) * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
 	int sub_pop_index = (blockIdx.x * threadsPerBlock + threadIdx.x) * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
 	if (fitness_index < popSize){
@@ -266,29 +254,12 @@ __global__ void genetic_step(int *population, double *population_fitness, double
 		// Selection is implicit with the sorting
 		// Crossover
 		device_crossover(population+sub_pop_index, distance_matrix);
+		//printf("Genetic step completed on thread: %d\n", blockIdx.x * threadsPerBlock + threadIdx.x);
 	}
 }
 
-// Mutation of a chromosome - swap two random genes - except the first of the subpopulation (aka the best of previous gen)
+
 __global__ void mutation(int *population){
-	double mutation_rate = (gamma * (blockIdx.x+1))/(popSize/subPopSize) + delta;
-	int thread = blockIdx.x * subPopSize + threadIdx.x;
-	// except the case the thread is the first of the subpopulation, mutate with a certain probability
-	if (thread % subPopSize != 0){
-		curandState state;
-		curand_init((unsigned long long)clock()+thread,0,0,&state);	// init random seed
-		if (curand_uniform(&state) < mutation_rate){
-			// mutate the chromosome swapping two random genes
-			int idx1 = int(curand_uniform(&state)*pathSize);
-			int idx2 = int(curand_uniform(&state)*pathSize);	// random from 0 to 1 * path size
-			int temp = population[thread*pathSize+idx1];
-			population[thread*pathSize+idx1] = population[thread*pathSize+idx2];
-			population[thread*pathSize+idx2] = temp;
-		}
-	}
-}
-
-__global__ void mutation_2(int *population){
 	double mutation_rate = (gamma * (blockIdx.x+1))/(popSize/subPopSize) + delta;
 	int thread = blockIdx.x * subPopSize + threadIdx.x;
 	// except the case the thread is the first of the subpopulation, mutate with a certain probability
@@ -309,8 +280,13 @@ __global__ void mutation_2(int *population){
 __global__ void migration(int *population){
 	// Migrate the first migrationNumber chromosomes from subpopulation i to subpopulation i+1 in a ring fashion
 	//int sub_pop_index = threadIdx.x;
-	int sub_pop_index = blockIdx.x;
+	int sub_pop_index = blockIdx.x * threadsPerBlock + threadIdx.x;
+	if (sub_pop_index >= popSize/subPopSize){
+		return;
+	}
+	//printf("\nThread: %d", blockIdx.x * threadsPerBlock + threadIdx.x);
 	int next_sub_pop_index = (sub_pop_index+1) % (popSize/subPopSize);
+	//printf("Attempting to migrate from %d to %d\n", sub_pop_index, next_sub_pop_index);
 	for (int i = 0; i < migrationNumber; i++){
 		// swap the chromosome i from subpopulation sub_pop_index with the chromosome subPopSize-migrationNumber+i from subpopulation next_sub_pop_index
 		for (int j = 0; j < pathSize; j++){
@@ -319,6 +295,7 @@ __global__ void migration(int *population){
 			population[next_sub_pop_index*subPopSize*pathSize+(subPopSize-migrationNumber+i)*pathSize+j] = temp;
 		}
 	}
+	//printf("Migration from %d to %d completed\n", sub_pop_index, next_sub_pop_index);
 	// NOTE: we suppose that migrationNumber is always less than half of the subpopulation size to avoid write before read conflicts
 }
 
@@ -326,14 +303,18 @@ __global__ void migration(int *population){
 __global__ void fit_sort(int *population, double *population_fitness){
 	//int fitness_index = threadIdx.x * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
 	//int sub_pop_index = threadIdx.x * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
-	int fitness_index = blockIdx.x * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
-	int sub_pop_index = blockIdx.x * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
+	int fitness_index = (blockIdx.x * threadsPerBlock + threadIdx.x) * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
+	int sub_pop_index = (blockIdx.x * threadsPerBlock + threadIdx.x) * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
+
+	if (fitness_index >= popSize){
+		return;
+	}
 	// Sort the subpopulation
 	device_fit_sort_subpop(population+sub_pop_index, population_fitness+fitness_index);
 }
 
 // Helper function to load data from file
-void load_data(int *coordinates, char *filename){
+void load_data(int *coordinates, const char *filename){
 	// read filename
 	FILE *file = fopen(filename, "r");
 	if (file == NULL){
@@ -347,7 +328,7 @@ void load_data(int *coordinates, char *filename){
 }
 
 void save_best_solution(int *best_chromosome, int *coordinates){
-	FILE *file = fopen("utils/best_solution.txt", "w");
+	FILE *file = fopen("../results/best_solution.txt", "w");
 	if (file == NULL){
 		printf("Error opening file best_solution.txt\n");
 		exit(1);
@@ -371,14 +352,7 @@ int main(){
 	// Load the coordinates of the cities from file
 	//-------------------------------------------------
     int *path_coordinates = (int*)malloc(pathSize * 2 * sizeof(int));	//[pathSize][2];
-    load_data(path_coordinates, "48_cities.txt");
-
-	// as a test print the coordinates
-	// for (int i=0;i<pathSize;i++){
-	// 	printf("%d %d\n",path_coordinates[i*2],path_coordinates[i*2+1]);
-	// }
-
-
+    load_data(path_coordinates, "../data/48_cities.txt");
 	//-----------------------------------------
 	// Allocate and fill the distance matrix
 	//-----------------------------------------
@@ -388,15 +362,6 @@ int main(){
 			distance_matrix[i*pathSize+j] = sqrt(pow(path_coordinates[i*2]-path_coordinates[j*2],2) + pow(path_coordinates[i*2+1]-path_coordinates[j*2+1],2));
 		}
 	}
-
-	// as a test print the distance matrix
-	// for (int i=0;i<pathSize;i++){
-	// 	for (int j=0;j<pathSize;j++){
-	// 		printf("%d\t ",(int)distance_matrix[i*pathSize+j]);
-	// 	}
-	// 	printf("\n");
-	// }
-
 	//---------------------------------------------------------------
 	// Allocate and fill the population in RAM
 	//---------------------------------------------------------------
@@ -421,10 +386,11 @@ int main(){
 
 	// different granularity levels for grids and block
 	dim3 c_grid(popSize/subPopSize,1,1);	dim3 c_block(subPopSize,1,1);					// chromosome granularity
-	//dim3 s_grid(1,1,1);						dim3 s_block(popSize/subPopSize,1,1);			// subpopulation granularity
-	// alternative s_grid
-	dim3 s_grid_alternative(popSize/subPopSize,1,1);	dim3 s_block_alternative(1,1,1);		// subpopulation granularity
-	dim3 s_grid(ceil((popSize/subPopSize) * (1.0/threadsPerBlock)),1,1); dim3 s_block(threadsPerBlock,1,1);
+	//dim3 s_grid_alternative(popSize/subPopSize,1,1);	dim3 s_block_alternative(1,1,1);
+	dim3 s_grid(ceil((popSize/subPopSize) * (1.0/threadsPerBlock)),1,1); dim3 s_block(threadsPerBlock,1,1); // subpopulation granularity
+
+	printf("Using %d total threads in subpopulation granularity\n", s_grid.x*s_block.x);
+	printf("Of which %d blocks containing %d threads each\n", s_grid.x, s_block.x);
 
 	// dim3 s_grid(ceil((popSize/subPopSize) * (1.0/32.0)),1,1) dim3 s_block(32,1,1)	// subpopulation granularity
 
@@ -476,38 +442,42 @@ int main(){
 	//------------------------------------------------------------------------------------------------------------------------------
 	int generation = 1;
 	srand(time(NULL));	// seed the random number generator
+	printf("Starting the GA\n");
 	while(generation <= generations){
 		clock_t start_gen = clock();
 
 		// Execute the GA steps
+		printf("Starting Genetic step\n");
 		genetic_step<<<s_grid,s_block>>>(gpu_population, gpu_population_fitness, gpu_distance_matrix); // subpopulation granularity
 			checkCUDAError("genetic_step kernel launch");
-			//cudaDeviceSynchronize();				// IS THIS NECESSARY??
-		mutation_2<<<c_grid,c_block>>>(gpu_population);	// chromosome granularity		IS IT CONVENIENT?
+			cudaDeviceSynchronize();				// IS THIS NECESSARY??
+		
+		printf("Starting Mutation\n");
+		mutation<<<c_grid,c_block>>>(gpu_population);	// chromosome granularity		IS IT CONVENIENT?
 			checkCUDAError("mutation kernel launch");
 			cudaDeviceSynchronize();				// IS THIS NECESSARY??
 		// calculate the fitness and distances for the new generation
 		if (generation % migrationAttemptDelay == 0 && rand()/RAND_MAX < migrationProbability){
 			// Migration - we suppose when a single island is able to migrate it forces the other islands to migrate as well
-			migration<<<s_grid_alternative,s_block_alternative>>>(gpu_population); // subpopulation granularity
+			printf("Starting Migration\n");
+			migration<<<s_grid,s_block>>>(gpu_population); // subpopulation granularity
 				checkCUDAError("migration kernel launch");
-				//cudaDeviceSynchronize();				// IS THIS NECESSARY??
+				cudaDeviceSynchronize();				// IS THIS NECESSARY??
 		}
 		// realign the population fitness and distances for the new generation
+		printf("Starting Fitness and Distance Calculation\n");
 		calculate_scores<<<c_grid,c_block>>>(gpu_population, gpu_distance_matrix, gpu_population_fitness, gpu_population_distances);
 			checkCUDAError("calculate_scores kernel launch");
-			//cudaDeviceSynchronize();				// IS THIS NECESSARY??
+			cudaDeviceSynchronize();				// IS THIS NECESSARY??
 		//printf("Generation: %d\n", generation);
 		generation++;
 
 		clock_t end_gen = clock();
 		fprintf(stderr,"Generation %d completed in %.2f ms\n", generation-1, ((double) (end_gen - start_gen)) * 1000.0 / CLOCKS_PER_SEC);
-		// sleep 1 ms
-		//usleep(1000);
 	}
 	// Sort the final population one more time
-	fit_sort<<<s_grid_alternative,s_block_alternative>>>(gpu_population, gpu_population_fitness); // subpopulation granularity
-	//cudaDeviceSynchronize();				// IS THIS NECESSARY??
+	fit_sort<<<s_grid,s_block>>>(gpu_population, gpu_population_fitness); // subpopulation granularity
+	cudaDeviceSynchronize();				// IS THIS NECESSARY??
 
 	// move back to host memory the final population
 	cudaMemcpy(population, gpu_population, popSize * pathSize * sizeof(int), cudaMemcpyDeviceToHost);

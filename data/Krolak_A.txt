@@ -99,4 +99,4 @@
 99 198 1810
 100 3950 1558
 
-optimum solution:  21282
+optimal solution:  21282

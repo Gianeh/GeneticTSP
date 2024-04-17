@@ -3,10 +3,10 @@
 #include <time.h>
 #include <math.h>
 
-#define generations 100		// number of generations
+#define generations 500		// number of generations
 
 #define pathSize 48				// dataset size in number of coordinates
-#define popSize 64000				// population size
+#define popSize 640000				// population size
 #define subPopSize 32				// popSize must be a multiple of this and this should be a multiple of the warp size (32)
 #define selectionThreshold 0.5		// the threshold (%) for the selection of the best chromosomes in the sub-populations
 #define migrationAttemptDelay 10	// the number of generations before a migration attempt is made
@@ -201,7 +201,7 @@ void mutation(int *population){
 			if (rand()/(RAND_MAX + 1.0) < mutation_rate){
 				// select two random points in the chromosome and swap them
 				int idx1 = (int)((rand()/(RAND_MAX+1.0)) * pathSize);
-				int idx2 = (int)((rand()/(RAND_MAX+1.0)) * pathSize);
+				int idx2 = (idx1+1) % pathSize;
 				int temp = population[sub_pop_index+j*pathSize+idx1];
 				population[sub_pop_index+j*pathSize+idx1] = population[sub_pop_index+j*pathSize+idx2];
 				population[sub_pop_index+j*pathSize+idx2] = temp;
@@ -210,7 +210,7 @@ void mutation(int *population){
 	}
 }
 
-void migrate(int *population){
+void migration(int *population){
 	for (int i = 0; i < popSize/subPopSize; i++){
 		int sub_pop_index = i;
 		int next_sub_pop_index = (sub_pop_index+1) % (popSize/subPopSize);
@@ -232,7 +232,7 @@ void fit_sort(int *population, double *population_fitness){
 	}
 }
 
-void load_data(int *coordinates, char *filename){
+void load_data(int *coordinates, const char *filename){
 	// read filename
 	FILE *file = fopen(filename, "r");
 	if (file == NULL){
@@ -246,7 +246,7 @@ void load_data(int *coordinates, char *filename){
 }
 
 void save_best_solution(int *best_chromosome, int *coordinates){
-	FILE *file = fopen("utils/best_solution.txt", "w");
+	FILE *file = fopen("../results/best_solution.txt", "w");
 	if (file == NULL){
 		printf("Error opening file best_solution.txt\n");
 		exit(1);
@@ -264,7 +264,7 @@ int main(){
 	// Load the coordinates of the cities from file
 	//-------------------------------------------------
     int *path_coordinates = (int*)malloc(pathSize * 2 * sizeof(int));	//[pathSize][2];
-    load_data(path_coordinates, "./data/48_cities.txt");
+    load_data(path_coordinates, "../data/48_cities.txt");
 
     //-----------------------------------------
 	// Allocate and fill the distance matrix
@@ -316,7 +316,7 @@ int main(){
 		mutation(population);
 
 		if (generation % migrationAttemptDelay == 0 && rand()/(RAND_MAX + 1.0) < migrationProbability){
-			migrate(population);
+			migration(population);
 		}
 
 		calculate_scores(population, distance_matrix, population_fitness, population_distances);

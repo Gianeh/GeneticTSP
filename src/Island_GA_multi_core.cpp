@@ -14,7 +14,7 @@
 
 #define generations 10		// number of generations
 
-#define threads 4			// number of threads on the processor
+#define threads 16			// number of threads on the processor
 
 #define pathSize 48				// dataset size in number of coordinates
 #define popSize 64000				// population size
@@ -119,8 +119,6 @@ private:
         }
     }
 };
-
-
 
 void random_shuffle(int *population, int sub_pop_num){
     for (int i = 0; i < sub_pop_num * subPopSize; i++){
@@ -308,7 +306,7 @@ void mutation(int *population, int sub_pop_num){
 			if (rand()/(RAND_MAX + 1.0) < mutation_rate){
 				// select two random points in the chromosome and swap them
 				int idx1 = (int)((rand()/(RAND_MAX+1.0)) * pathSize);
-				int idx2 = (int)((rand()/(RAND_MAX+1.0)) * pathSize);
+				int idx2 = (idx1+1) % pathSize;
 				int temp = population[sub_pop_index+j*pathSize+idx1];
 				population[sub_pop_index+j*pathSize+idx1] = population[sub_pop_index+j*pathSize+idx2];
 				population[sub_pop_index+j*pathSize+idx2] = temp;
@@ -317,7 +315,7 @@ void mutation(int *population, int sub_pop_num){
 	}
 }
 
-void migrate(int *population, int sub_pop_num, int thread){
+void migration(int *population, int sub_pop_num, int thread){
 	for (int i = 0; i < sub_pop_num; i++){
 		int sub_pop_index = i * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
 		// Avoid last thread to overflow the islands (sub-populations)
@@ -353,7 +351,7 @@ void fit_sort(int *population, double *population_fitness, int sub_pop_num){
 	}
 }
 
-void load_data(int *coordinates, char *filename){
+void load_data(int *coordinates, const char *filename){
 	// read filename
 	FILE *file = fopen(filename, "r");
 	if (file == NULL){
@@ -367,7 +365,7 @@ void load_data(int *coordinates, char *filename){
 }
 
 void save_best_solution(int *best_chromosome, int *coordinates){
-	FILE *file = fopen("data/best_solution.txt", "w");
+	FILE *file = fopen("../results/best_solution.txt", "w");
 	if (file == NULL){
 		printf("Error opening file best_solution.txt\n");
 		exit(1);
@@ -385,7 +383,7 @@ int main(){
 	// Load the coordinates of the cities from file
 	//-------------------------------------------------
     int *path_coordinates = (int*)malloc(pathSize * 2 * sizeof(int));	//[pathSize][2];
-    load_data(path_coordinates, "./data/48_cities.txt");
+    load_data(path_coordinates, "../data/48_cities.txt");
 
     //-----------------------------------------
 	// Allocate and fill the distance matrix
@@ -466,7 +464,7 @@ int main(){
 			for (int i = 0; i < threads; i++){
 				int *pop_start = population + i * sub_pop_num * subPopSize * pathSize;
 				pool.enqueue([pop_start, sub_pop_num, i](){
-					migrate(pop_start, sub_pop_num, i);
+					migration(pop_start, sub_pop_num, i);
 				});
 			}
 			// Wait for the threads to finish
