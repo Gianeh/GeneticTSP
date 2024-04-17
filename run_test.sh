@@ -1,5 +1,5 @@
 #!/bin/bash
-files=("./src/Island_GA_single_core.c" "./src/Island_GA_multi_core.cpp" "./src/Island_GA_multi_core_no_pool.cpp" "./src/Island_GA_opemp.cpp" "./src/Island_GA_cuda.cu")
+files=("./src/Island_GA_single_core copy.c" "./src/Island_GA_multi_core copy.cpp" "./src/Island_GA_multi_core_no_pool copy.cpp" "./src/Island_GA_opemp copy.cpp" "./src/Island_GA_cuda copy.cu")
 pop_sizes=(128 1024 8192 65536 524288)
 generations=100
 cuda_tpbs=(32 64)
@@ -66,10 +66,32 @@ echo "############################"
 cd src
 
 for exec in "${executables[@]}";do
+    total_generations=0
+    total_intergeneration_time=0
+    sum_total_time=0
+    every_total=true
     for((i=1;i<6;i++)); do
         new_exec=$(echo "$exec" | cut -d"/" -f3)
         echo "executing $new_exec for the $i time"
-        result=$("./$new_exec")
-        echo "$result"
+        result=$("./$new_exec" 2>&1)
+        generation=$(echo "$result" | grep -ic "Generation .* completed in")
+        gen_time=$(echo "$result" | grep -i "Generation .* completed in" | awk '{ sum += $5 } END { print sum }')
+        total_intergeneration_time=$(echo "$gen_time + $total_intergeneration_time" | bc)
+        total_generations=$(("$total_generations" + "$generation"))
+        total_time=$(echo "$result" | grep -i "Execution completed in" | awk '{print $4}')
+        if [[ -n $total_time ]]; then
+            echo "total time $total_time"
+            sum_total_time=$(echo "$total_time + $sum_total_time" | bc)
+        else
+            every_total=false
+        fi
     done
+    echo -e "##############################################\n          results\n##############################################"
+    if $every_total; then
+        avg_total_time=$(echo "scale=2; $sum_total_time / 5" | bc)
+        echo "avg total time $avg_total_time"
+    fi
+    avg_intgen_time=$(echo "scale=2; $total_intergeneration_time / $total_generations" | bc)
+    echo -e "total generations: $total_generations, total intergeneration_time $total_intergeneration_time \n avg intergen_time $avg_intgen_time"
+    echo "##############################################"
 done
