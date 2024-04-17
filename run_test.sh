@@ -1,5 +1,5 @@
 #!/bin/bash
-files=("./src/Island_GA_single_core copy.c" "./src/Island_GA_multi_core copy.cpp" "./src/Island_GA_multi_core_no_pool copy.cpp" "./src/Island_GA_opemp copy.cpp" "./src/Island_GA_cuda copy.cu")
+files=("./src/Island_GA_single_core.c" "./src/Island_GA_multi_core.cpp" "./src/Island_GA_multi_core_no_pool.cpp" "./src/Island_GA_opemp.cpp" "./src/Island_GA_cuda.cu")
 pop_sizes=(128 1024 8192 65536 524288)
 generations=100
 cuda_tpbs=(32 64)
@@ -63,10 +63,13 @@ for exec in "${executables[@]}";do
 done
 echo "############################"
 
+cd src
+
 for exec in "${executables[@]}";do
-    for((i=0;i<5;i++)); do
-        echo "executing $exec"
-        result=$("./$exec")
+    for((i=1;i<6;i++)); do
+        new_exec=$(echo "$exec" | cut -d"/" -f3)
+        echo "executing $new_exec for the $i time"
+        result=$("./$new_exec")
         echo "$result"
     done
 done
