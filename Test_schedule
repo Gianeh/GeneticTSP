@@ -17,3 +17,11 @@ Average speed:
             threads: 16
         openmp:
             threads: 16
+
+Result test:
+    Measure the best distance achieved on N runs of the algorithm using fixed pop size and generations.
+    Measure the average total computation time elapsed on N runs of the algorithm using fixed pop size and generations.
+
+    N runs per executable: 5
+    generations: 50k
+    population size: 65536
