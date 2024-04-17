@@ -1,0 +1,862 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 78.87      0.56     0.56    61898     0.01     0.01  distance_crossover(int*, int*, int*, double*)
+ 11.27      0.64     0.08     3962     0.02     0.02  fit_sort_subpop(int*, double*)
+  5.63      0.68     0.04       10     4.00     4.00  random_shuffle(int*, int)
+  1.41      0.69     0.01    70902     0.00     0.00  calculate_distance(int*, double*)
+  1.41      0.70     0.01     1998     0.01     0.29  crossover(int*, double*, int)
+  1.41      0.71     0.01                             _init
+  0.00      0.71     0.00     4608     0.00     0.00  __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int)
+  0.00      0.71     0.00      130     0.00     0.00  std::thread::id::id()
+  0.00      0.71     0.00      108     0.00     0.00  std::remove_reference<std::thread::id&>::type&& std::move<std::thread::id&>(std::thread::id&)
+  0.00      0.71     0.00       90     0.00     0.00  main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&)
+  0.00      0.71     0.00       83     0.00     0.00  std::thread::joinable() const
+  0.00      0.71     0.00       83     0.00     0.00  std::operator==(std::thread::id, std::thread::id)
+  0.00      0.71     0.00       80     0.00     0.00  main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&)
+  0.00      0.71     0.00       78     0.00     0.00  std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::_M_ptr()
+  0.00      0.71     0.00       78     0.00     0.00  main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&)
+  0.00      0.71     0.00       77     0.00     0.00  std::_Head_base<0ul, std::thread::_State*, false>::_M_head(std::_Head_base<0ul, std::thread::_State*, false>&)
+  0.00      0.71     0.00       77     0.00     0.00  std::tuple_element<0ul, std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> > >::type& std::get<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >&)
+  0.00      0.71     0.00       75     0.00     0.00  std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_M_head(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&)
+  0.00      0.71     0.00       75     0.00     0.00  std::thread::_State*& std::__get_helper<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&)
+  0.00      0.71     0.00       61     0.00     0.00  main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&)
+  0.00      0.71     0.00       47     0.00     0.00  std::thread::~thread()
+  0.00      0.71     0.00       39     0.00     0.00  std::__uniq_ptr_data<std::thread::_State, std::default_delete<std::thread::_State>, true, true>::__uniq_ptr_impl(std::thread::_State*)
+  0.00      0.71     0.00       38     0.00     0.00  std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::unique_ptr<std::default_delete<std::thread::_State>, void>(std::thread::_State*)
+  0.00      0.71     0.00       38     0.00     0.00  std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr()
+  0.00      0.71     0.00       38     0.00     0.00  std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_Tuple_impl()
+  0.00      0.71     0.00       38     0.00     0.00  std::_Tuple_impl<1ul, std::default_delete<std::thread::_State> >::_Tuple_impl()
+  0.00      0.71     0.00       38     0.00     0.00  std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::__uniq_ptr_impl(std::thread::_State*)
+  0.00      0.71     0.00       38     0.00     0.00  std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >::tuple<true, true>()
+  0.00      0.71     0.00       37     0.00     0.00  std::_Head_base<0ul, std::thread::_State*, false>::_Head_base()
+  0.00      0.71     0.00       37     0.00     0.00  std::_Head_base<1ul, std::default_delete<std::thread::_State>, true>::_Head_base()
+  0.00      0.71     0.00       37     0.00     0.00  std::thread::_State::_State()
+  0.00      0.71     0.00       36     0.00     0.00  std::thread::swap(std::thread&)
+  0.00      0.71     0.00       36     0.00     0.00  std::thread::operator=(std::thread&&)
+  0.00      0.71     0.00       36     0.00     0.00  std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<std::thread::id> >, std::is_move_constructible<std::thread::id>, std::is_move_assignable<std::thread::id> >::value, void>::type std::swap<std::thread::id>(std::thread::id&, std::thread::id&)
+  0.00      0.71     0.00       16     0.00     0.62  calculate_scores(int*, double*, double*, double*, int)
+  0.00      0.71     0.00       10     0.00     0.00  mutation(int*, int)
+  0.00      0.71     0.00       10     0.00     0.00  std::_Head_base<0ul, main::{lambda()#2}, false>::_Head_base<main::{lambda()#2}>(main::{lambda()#2}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::_Head_base<0ul, main::{lambda()#5}, false>::_Head_base<main::{lambda()#5}>(main::{lambda()#5}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::_Head_base<0ul, main::{lambda()#1}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#1}, false>&)
+  0.00      0.71     0.00       10     0.00     0.00  std::_Head_base<0ul, main::{lambda()#1}, false>::_Head_base<main::{lambda()#1}>(main::{lambda()#1}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::_Tuple_impl<0ul, main::{lambda()#2}>::_Tuple_impl<main::{lambda()#2}>(main::{lambda()#2}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::_Tuple_impl<0ul, main::{lambda()#5}>::_Tuple_impl<main::{lambda()#5}>(main::{lambda()#5}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::_Tuple_impl<0ul, main::{lambda()#1}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#1}>&)
+  0.00      0.71     0.00       10     0.00     0.00  std::_Tuple_impl<0ul, main::{lambda()#1}>::_Tuple_impl<main::{lambda()#1}>(main::{lambda()#1}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::tuple<main::{lambda()#2}>::tuple<main::{lambda()#2}, true, true>(main::{lambda()#2}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::tuple<main::{lambda()#5}>::tuple<main::{lambda()#5}, true, true>(main::{lambda()#5}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::tuple<main::{lambda()#1}>::tuple<main::{lambda()#1}, true, true>(main::{lambda()#1}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_State_impl<main::{lambda()#2}>(main::{lambda()#2}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_State_impl<main::{lambda()#5}>(main::{lambda()#5}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::~_State_impl()
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_State_impl<main::{lambda()#1}>(main::{lambda()#1}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::~_State_impl()
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_Invoker<main::{lambda()#2}>(main::{lambda()#2}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_Invoker<main::{lambda()#5}>(main::{lambda()#5}&&)
+  0.00      0.71     0.00       10     0.00     4.62  void std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_Invoker<main::{lambda()#1}>(main::{lambda()#1}&&)
+  0.00      0.71     0.00       10     0.00     4.62  std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::operator()()
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::thread<main::{lambda()#2}, , void>(main::{lambda()#2}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::thread<main::{lambda()#5}, , void>(main::{lambda()#5}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::thread<main::{lambda()#1}, , void>(main::{lambda()#1}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::thread::thread()
+  0.00      0.71     0.00       10     0.00     0.00  main::{lambda()#1}& std::__get_helper<0ul, main::{lambda()#1}>(std::_Tuple_impl<0ul, main::{lambda()#1}>&)
+  0.00      0.71     0.00       10     0.00     4.62  void std::__invoke_impl<void, main::{lambda()#1}>(std::__invoke_other, main::{lambda()#1}&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::tuple_element<0ul, std::tuple<main::{lambda()#1}> >::type&& std::get<0ul, main::{lambda()#1}>(std::tuple<main::{lambda()#1}>&&)
+  0.00      0.71     0.00       10     0.00     0.00  std::remove_reference<std::tuple<main::{lambda()#1}>&>::type&& std::move<std::tuple<main::{lambda()#1}>&>(std::tuple<main::{lambda()#1}>&)
+  0.00      0.71     0.00       10     0.00     4.62  std::__invoke_result<main::{lambda()#1}>::type std::__invoke<main::{lambda()#1}>(main::{lambda()#1}&&)
+  0.00      0.71     0.00       10     0.00     4.62  main::{lambda()#1}::operator()() const
+  0.00      0.71     0.00        9     0.00     0.00  std::_Head_base<0ul, main::{lambda()#4}, false>::_Head_base<main::{lambda()#4}>(main::{lambda()#4}&&)
+  0.00      0.71     0.00        9     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::~_State_impl()
+  0.00      0.71     0.00        9     0.00     4.41  std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::operator()()
+  0.00      0.71     0.00        8     0.00    76.29  genetic_step(int*, double*, double*, int)
+  0.00      0.71     0.00        8     0.00     0.00  std::_Tuple_impl<0ul, main::{lambda()#2}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#2}>&)
+  0.00      0.71     0.00        8     0.00     0.00  std::_Tuple_impl<0ul, main::{lambda()#4}>::_Tuple_impl<main::{lambda()#4}>(main::{lambda()#4}&&)
+  0.00      0.71     0.00        8     0.00     0.00  std::tuple<main::{lambda()#4}>::tuple<main::{lambda()#4}, true, true>(main::{lambda()#4}&&)
+  0.00      0.71     0.00        8     0.00    76.29  void std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>)
+  0.00      0.71     0.00        8     0.00    76.29  std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::operator()()
+  0.00      0.71     0.00        8     0.00     0.00  std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_Invoker<main::{lambda()#4}>(main::{lambda()#4}&&)
+  0.00      0.71     0.00        8     0.00     4.96  void std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>)
+  0.00      0.71     0.00        8     0.00     0.00  main::{lambda()#2}& std::__get_helper<0ul, main::{lambda()#2}>(std::_Tuple_impl<0ul, main::{lambda()#2}>&)
+  0.00      0.71     0.00        8     0.00     0.00  main::{lambda()#5}& std::__get_helper<0ul, main::{lambda()#5}>(std::_Tuple_impl<0ul, main::{lambda()#5}>&)
+  0.00      0.71     0.00        8     0.00     0.00  std::tuple_element<0ul, std::tuple<main::{lambda()#2}> >::type&& std::get<0ul, main::{lambda()#2}>(std::tuple<main::{lambda()#2}>&&)
+  0.00      0.71     0.00        8     0.00     0.00  std::tuple_element<0ul, std::tuple<main::{lambda()#5}> >::type&& std::get<0ul, main::{lambda()#5}>(std::tuple<main::{lambda()#5}>&&)
+  0.00      0.71     0.00        8     0.00     0.00  std::remove_reference<std::tuple<main::{lambda()#2}>&>::type&& std::move<std::tuple<main::{lambda()#2}>&>(std::tuple<main::{lambda()#2}>&)
+  0.00      0.71     0.00        7     0.00     5.67  fit_sort(int*, double*, int)
+  0.00      0.71     0.00        7     0.00     0.00  std::_Head_base<0ul, main::{lambda()#2}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#2}, false>&)
+  0.00      0.71     0.00        7     0.00     0.00  std::_Tuple_impl<0ul, main::{lambda()#5}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#5}>&)
+  0.00      0.71     0.00        7     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_State_impl<main::{lambda()#4}>(main::{lambda()#4}&&)
+  0.00      0.71     0.00        7     0.00     0.00  std::remove_reference<std::tuple<main::{lambda()#5}>&>::type&& std::move<std::tuple<main::{lambda()#5}>&>(std::tuple<main::{lambda()#5}>&)
+  0.00      0.71     0.00        7     0.00     5.67  std::__invoke_result<main::{lambda()#5}>::type std::__invoke<main::{lambda()#5}>(main::{lambda()#5}&&)
+  0.00      0.71     0.00        7     0.00    87.18  main::{lambda()#2}::operator()() const
+  0.00      0.71     0.00        7     0.00     5.67  main::{lambda()#5}::operator()() const
+  0.00      0.71     0.00        6     0.00     0.00  std::_Head_base<0ul, main::{lambda()#5}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#5}, false>&)
+  0.00      0.71     0.00        6     0.00     0.00  std::thread::thread<main::{lambda()#4}, , void>(main::{lambda()#4}&&)
+  0.00      0.71     0.00        6     0.00   101.71  void std::__invoke_impl<void, main::{lambda()#2}>(std::__invoke_other, main::{lambda()#2}&&)
+  0.00      0.71     0.00        6     0.00     0.62  void std::__invoke_impl<void, main::{lambda()#4}>(std::__invoke_other, main::{lambda()#4}&&)
+  0.00      0.71     0.00        6     0.00     6.62  void std::__invoke_impl<void, main::{lambda()#5}>(std::__invoke_other, main::{lambda()#5}&&)
+  0.00      0.71     0.00        6     0.00   101.71  std::__invoke_result<main::{lambda()#2}>::type std::__invoke<main::{lambda()#2}>(main::{lambda()#2}&&)
+  0.00      0.71     0.00        5     0.00     0.00  main::{lambda()#4}& std::__get_helper<0ul, main::{lambda()#4}>(std::_Tuple_impl<0ul, main::{lambda()#4}>&)
+  0.00      0.71     0.00        4     0.00     0.00  std::_Head_base<0ul, main::{lambda()#4}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#4}, false>&)
+  0.00      0.71     0.00        4     0.00     0.00  std::_Tuple_impl<0ul, main::{lambda()#4}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#4}>&)
+  0.00      0.71     0.00        4     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::~_State_impl()
+  0.00      0.71     0.00        4     0.00     0.00  std::tuple_element<0ul, std::tuple<main::{lambda()#4}> >::type&& std::get<0ul, main::{lambda()#4}>(std::tuple<main::{lambda()#4}>&&)
+  0.00      0.71     0.00        4     0.00     0.94  std::__invoke_result<main::{lambda()#4}>::type std::__invoke<main::{lambda()#4}>(main::{lambda()#4}&&)
+  0.00      0.71     0.00        4     0.00     0.94  main::{lambda()#4}::operator()() const
+  0.00      0.71     0.00        3     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const
+  0.00      0.71     0.00        3     0.00     1.25  void std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>)
+  0.00      0.71     0.00        3     0.00     1.25  std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::operator()()
+  0.00      0.71     0.00        3     0.00     0.00  std::remove_reference<std::tuple<main::{lambda()#4}>&>::type&& std::move<std::tuple<main::{lambda()#4}>&>(std::tuple<main::{lambda()#4}>&)
+  0.00      0.71     0.00        2     0.00     0.00  std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const
+  0.00      0.71     0.00        1     0.00     0.00  save_best_solution(int*, int*)
+  0.00      0.71     0.00        1     0.00     0.00  load_data(int*, char*)
+  0.00      0.71     0.00        1     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1000l> >::count() const
+  0.00      0.71     0.00        1     0.00     0.00  std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1000l> > >::value, std::chrono::duration<long, std::ratio<1l, 1000l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1000l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
+  0.00      0.71     0.00        1     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1000l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1000l> >, std::ratio<1l, 1000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
+  0.00      0.71     0.00        1     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&)
+  0.00      0.71     0.00        1     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1000l> >::duration<long, void>(long const&)
+  0.00      0.71     0.00        1     0.00     0.00  std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&)
+  0.00      0.71     0.00        1     0.00     0.00  std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 1.41% of 0.71 seconds
+
+index % time    self  children    called     name
+                0.00    0.61       8/8           main::{lambda()#2}::operator()() const [4]
+[1]     86.0    0.00    0.61       8         genetic_step(int*, double*, double*, int) [1]
+                0.01    0.56    1998/1998        crossover(int*, double*, int) [8]
+                0.04    0.00    1995/3962        fit_sort_subpop(int*, double*) [10]
+-----------------------------------------------
+                0.00    0.61       8/8           std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::operator()() [3]
+[2]     86.0    0.00    0.61       8         void std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [2]
+                0.00    0.61       6/6           std::__invoke_result<main::{lambda()#2}>::type std::__invoke<main::{lambda()#2}>(main::{lambda()#2}&&) [6]
+                0.00    0.00       8/8           std::remove_reference<std::tuple<main::{lambda()#2}>&>::type&& std::move<std::tuple<main::{lambda()#2}>&>(std::tuple<main::{lambda()#2}>&) [106]
+                0.00    0.00       8/8           std::tuple_element<0ul, std::tuple<main::{lambda()#2}> >::type&& std::get<0ul, main::{lambda()#2}>(std::tuple<main::{lambda()#2}>&&) [104]
+-----------------------------------------------
+                0.00    0.61       8/8           std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_M_run() [7]
+[3]     86.0    0.00    0.61       8         std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::operator()() [3]
+                0.00    0.61       8/8           void std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [2]
+-----------------------------------------------
+                0.00    0.61       7/7           void std::__invoke_impl<void, main::{lambda()#2}>(std::__invoke_other, main::{lambda()#2}&&) [5]
+[4]     86.0    0.00    0.61       7         main::{lambda()#2}::operator()() const [4]
+                0.00    0.61       8/8           genetic_step(int*, double*, double*, int) [1]
+                0.00    0.00      10/10          mutation(int*, int) [69]
+-----------------------------------------------
+                0.00    0.61       6/6           std::__invoke_result<main::{lambda()#2}>::type std::__invoke<main::{lambda()#2}>(main::{lambda()#2}&&) [6]
+[5]     86.0    0.00    0.61       6         void std::__invoke_impl<void, main::{lambda()#2}>(std::__invoke_other, main::{lambda()#2}&&) [5]
+                0.00    0.61       7/7           main::{lambda()#2}::operator()() const [4]
+                0.00    0.00       6/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+-----------------------------------------------
+                0.00    0.61       6/6           void std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [2]
+[6]     86.0    0.00    0.61       6         std::__invoke_result<main::{lambda()#2}>::type std::__invoke<main::{lambda()#2}>(main::{lambda()#2}&&) [6]
+                0.00    0.61       6/6           void std::__invoke_impl<void, main::{lambda()#2}>(std::__invoke_other, main::{lambda()#2}&&) [5]
+                0.00    0.00       6/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+-----------------------------------------------
+                                                 <spontaneous>
+[7]     86.0    0.00    0.61                 std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_M_run() [7]
+                0.00    0.61       8/8           std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::operator()() [3]
+-----------------------------------------------
+                0.01    0.56    1998/1998        genetic_step(int*, double*, double*, int) [1]
+[8]     80.3    0.01    0.56    1998         crossover(int*, double*, int) [8]
+                0.56    0.00   61898/61898       distance_crossover(int*, int*, int*, double*) [9]
+-----------------------------------------------
+                0.56    0.00   61898/61898       crossover(int*, double*, int) [8]
+[9]     78.9    0.56    0.00   61898         distance_crossover(int*, int*, int*, double*) [9]
+-----------------------------------------------
+                0.04    0.00    1967/3962        fit_sort(int*, double*, int) [20]
+                0.04    0.00    1995/3962        genetic_step(int*, double*, double*, int) [1]
+[10]    11.3    0.08    0.00    3962         fit_sort_subpop(int*, double*) [10]
+-----------------------------------------------
+                0.00    0.05      10/10          std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::operator()() [12]
+[11]     6.5    0.00    0.05      10         void std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [11]
+                0.00    0.05      10/10          std::__invoke_result<main::{lambda()#1}>::type std::__invoke<main::{lambda()#1}>(main::{lambda()#1}&&) [14]
+                0.00    0.00      10/10          std::remove_reference<std::tuple<main::{lambda()#1}>&>::type&& std::move<std::tuple<main::{lambda()#1}>&>(std::tuple<main::{lambda()#1}>&) [95]
+                0.00    0.00      10/10          std::tuple_element<0ul, std::tuple<main::{lambda()#1}> >::type&& std::get<0ul, main::{lambda()#1}>(std::tuple<main::{lambda()#1}>&&) [94]
+-----------------------------------------------
+                0.00    0.05      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_M_run() [16]
+[12]     6.5    0.00    0.05      10         std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::operator()() [12]
+                0.00    0.05      10/10          void std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [11]
+-----------------------------------------------
+                0.00    0.05      10/10          std::__invoke_result<main::{lambda()#1}>::type std::__invoke<main::{lambda()#1}>(main::{lambda()#1}&&) [14]
+[13]     6.5    0.00    0.05      10         void std::__invoke_impl<void, main::{lambda()#1}>(std::__invoke_other, main::{lambda()#1}&&) [13]
+                0.00    0.05      10/10          main::{lambda()#1}::operator()() const [15]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+-----------------------------------------------
+                0.00    0.05      10/10          void std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [11]
+[14]     6.5    0.00    0.05      10         std::__invoke_result<main::{lambda()#1}>::type std::__invoke<main::{lambda()#1}>(main::{lambda()#1}&&) [14]
+                0.00    0.05      10/10          void std::__invoke_impl<void, main::{lambda()#1}>(std::__invoke_other, main::{lambda()#1}&&) [13]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+-----------------------------------------------
+                0.00    0.05      10/10          void std::__invoke_impl<void, main::{lambda()#1}>(std::__invoke_other, main::{lambda()#1}&&) [13]
+[15]     6.5    0.00    0.05      10         main::{lambda()#1}::operator()() const [15]
+                0.04    0.00      10/10          random_shuffle(int*, int) [17]
+                0.00    0.01      10/16          calculate_scores(int*, double*, double*, double*, int) [26]
+-----------------------------------------------
+                                                 <spontaneous>
+[16]     6.5    0.00    0.05                 std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_M_run() [16]
+                0.00    0.05      10/10          std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::operator()() [12]
+-----------------------------------------------
+                0.04    0.00      10/10          main::{lambda()#1}::operator()() const [15]
+[17]     5.6    0.04    0.00      10         random_shuffle(int*, int) [17]
+-----------------------------------------------
+                0.00    0.04       9/9           std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_M_run() [24]
+[18]     5.6    0.00    0.04       9         std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::operator()() [18]
+                0.00    0.04       8/8           void std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [19]
+-----------------------------------------------
+                0.00    0.04       8/8           std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::operator()() [18]
+[19]     5.6    0.00    0.04       8         void std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [19]
+                0.00    0.04       7/7           std::__invoke_result<main::{lambda()#5}>::type std::__invoke<main::{lambda()#5}>(main::{lambda()#5}&&) [21]
+                0.00    0.00       8/8           std::tuple_element<0ul, std::tuple<main::{lambda()#5}> >::type&& std::get<0ul, main::{lambda()#5}>(std::tuple<main::{lambda()#5}>&&) [105]
+                0.00    0.00       7/7           std::remove_reference<std::tuple<main::{lambda()#5}>&>::type&& std::move<std::tuple<main::{lambda()#5}>&>(std::tuple<main::{lambda()#5}>&) [110]
+-----------------------------------------------
+                0.00    0.04       7/7           main::{lambda()#5}::operator()() const [22]
+[20]     5.6    0.00    0.04       7         fit_sort(int*, double*, int) [20]
+                0.04    0.00    1967/3962        fit_sort_subpop(int*, double*) [10]
+-----------------------------------------------
+                0.00    0.04       7/7           void std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [19]
+[21]     5.6    0.00    0.04       7         std::__invoke_result<main::{lambda()#5}>::type std::__invoke<main::{lambda()#5}>(main::{lambda()#5}&&) [21]
+                0.00    0.04       6/6           void std::__invoke_impl<void, main::{lambda()#5}>(std::__invoke_other, main::{lambda()#5}&&) [23]
+                0.00    0.00       6/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+-----------------------------------------------
+                0.00    0.04       7/7           void std::__invoke_impl<void, main::{lambda()#5}>(std::__invoke_other, main::{lambda()#5}&&) [23]
+[22]     5.6    0.00    0.04       7         main::{lambda()#5}::operator()() const [22]
+                0.00    0.04       7/7           fit_sort(int*, double*, int) [20]
+-----------------------------------------------
+                0.00    0.04       6/6           std::__invoke_result<main::{lambda()#5}>::type std::__invoke<main::{lambda()#5}>(main::{lambda()#5}&&) [21]
+[23]     5.6    0.00    0.04       6         void std::__invoke_impl<void, main::{lambda()#5}>(std::__invoke_other, main::{lambda()#5}&&) [23]
+                0.00    0.04       7/7           main::{lambda()#5}::operator()() const [22]
+                0.00    0.00       7/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+-----------------------------------------------
+                                                 <spontaneous>
+[24]     5.6    0.00    0.04                 std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_M_run() [24]
+                0.00    0.04       9/9           std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::operator()() [18]
+-----------------------------------------------
+                0.01    0.00   70902/70902       calculate_scores(int*, double*, double*, double*, int) [26]
+[25]     1.4    0.01    0.00   70902         calculate_distance(int*, double*) [25]
+-----------------------------------------------
+                0.00    0.00       6/16          main::{lambda()#4}::operator()() const [30]
+                0.00    0.01      10/16          main::{lambda()#1}::operator()() const [15]
+[26]     1.4    0.00    0.01      16         calculate_scores(int*, double*, double*, double*, int) [26]
+                0.01    0.00   70902/70902       calculate_distance(int*, double*) [25]
+-----------------------------------------------
+                                                 <spontaneous>
+[27]     1.4    0.01    0.00                 _init [27]
+-----------------------------------------------
+                0.00    0.00       6/6           std::__invoke_result<main::{lambda()#4}>::type std::__invoke<main::{lambda()#4}>(main::{lambda()#4}&&) [29]
+[28]     0.5    0.00    0.00       6         void std::__invoke_impl<void, main::{lambda()#4}>(std::__invoke_other, main::{lambda()#4}&&) [28]
+                0.00    0.00       4/4           main::{lambda()#4}::operator()() const [30]
+                0.00    0.00       3/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+-----------------------------------------------
+                0.00    0.00       4/4           void std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [31]
+[29]     0.5    0.00    0.00       4         std::__invoke_result<main::{lambda()#4}>::type std::__invoke<main::{lambda()#4}>(main::{lambda()#4}&&) [29]
+                0.00    0.00       6/6           void std::__invoke_impl<void, main::{lambda()#4}>(std::__invoke_other, main::{lambda()#4}&&) [28]
+                0.00    0.00       4/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+-----------------------------------------------
+                0.00    0.00       4/4           void std::__invoke_impl<void, main::{lambda()#4}>(std::__invoke_other, main::{lambda()#4}&&) [28]
+[30]     0.5    0.00    0.00       4         main::{lambda()#4}::operator()() const [30]
+                0.00    0.00       6/16          calculate_scores(int*, double*, double*, double*, int) [26]
+-----------------------------------------------
+                0.00    0.00       3/3           std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::operator()() [32]
+[31]     0.5    0.00    0.00       3         void std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [31]
+                0.00    0.00       4/4           std::__invoke_result<main::{lambda()#4}>::type std::__invoke<main::{lambda()#4}>(main::{lambda()#4}&&) [29]
+                0.00    0.00       4/4           std::tuple_element<0ul, std::tuple<main::{lambda()#4}> >::type&& std::get<0ul, main::{lambda()#4}>(std::tuple<main::{lambda()#4}>&&) [117]
+                0.00    0.00       3/3           std::remove_reference<std::tuple<main::{lambda()#4}>&>::type&& std::move<std::tuple<main::{lambda()#4}>&>(std::tuple<main::{lambda()#4}>&) [119]
+-----------------------------------------------
+                0.00    0.00       3/3           std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_M_run() [33]
+[32]     0.5    0.00    0.00       3         std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::operator()() [32]
+                0.00    0.00       3/3           void std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [31]
+-----------------------------------------------
+                                                 <spontaneous>
+[33]     0.5    0.00    0.00                 std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_M_run() [33]
+                0.00    0.00       3/3           std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::operator()() [32]
+-----------------------------------------------
+                0.00    0.00    4608/4608        main [39]
+[41]     0.0    0.00    0.00    4608         __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int) [41]
+-----------------------------------------------
+                0.00    0.00       7/130         std::thread::thread<main::{lambda()#4}, , void>(main::{lambda()#4}&&) [112]
+                0.00    0.00      10/130         std::thread::thread<main::{lambda()#1}, , void>(main::{lambda()#1}&&) [91]
+                0.00    0.00      10/130         std::thread::thread<main::{lambda()#2}, , void>(main::{lambda()#2}&&) [89]
+                0.00    0.00      10/130         std::thread::thread<main::{lambda()#5}, , void>(main::{lambda()#5}&&) [90]
+                0.00    0.00      10/130         std::thread::thread() [92]
+                0.00    0.00      83/130         std::thread::joinable() const [45]
+[42]     0.0    0.00    0.00     130         std::thread::id::id() [42]
+-----------------------------------------------
+                0.00    0.00     108/108         std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<std::thread::id> >, std::is_move_constructible<std::thread::id>, std::is_move_assignable<std::thread::id> >::value, void>::type std::swap<std::thread::id>(std::thread::id&, std::thread::id&) [68]
+[43]     0.0    0.00    0.00     108         std::remove_reference<std::thread::id&>::type&& std::move<std::thread::id&>(std::thread::id&) [43]
+-----------------------------------------------
+                0.00    0.00      10/90          std::thread::thread<main::{lambda()#1}, , void>(main::{lambda()#1}&&) [91]
+                0.00    0.00      10/90          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_State_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [84]
+                0.00    0.00      10/90          std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_Invoker<main::{lambda()#1}>(main::{lambda()#1}&&) [88]
+                0.00    0.00      10/90          std::tuple<main::{lambda()#1}>::tuple<main::{lambda()#1}, true, true>(main::{lambda()#1}&&) [80]
+                0.00    0.00      10/90          std::_Tuple_impl<0ul, main::{lambda()#1}>::_Tuple_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [77]
+                0.00    0.00      10/90          std::_Head_base<0ul, main::{lambda()#1}, false>::_Head_base<main::{lambda()#1}>(main::{lambda()#1}&&) [73]
+                0.00    0.00      10/90          std::tuple_element<0ul, std::tuple<main::{lambda()#1}> >::type&& std::get<0ul, main::{lambda()#1}>(std::tuple<main::{lambda()#1}>&&) [94]
+                0.00    0.00      10/90          std::__invoke_result<main::{lambda()#1}>::type std::__invoke<main::{lambda()#1}>(main::{lambda()#1}&&) [14]
+                0.00    0.00      10/90          void std::__invoke_impl<void, main::{lambda()#1}>(std::__invoke_other, main::{lambda()#1}&&) [13]
+[44]     0.0    0.00    0.00      90         main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+-----------------------------------------------
+                0.00    0.00      36/83          std::thread::operator=(std::thread&&) [67]
+                0.00    0.00      47/83          std::thread::~thread() [55]
+[45]     0.0    0.00    0.00      83         std::thread::joinable() const [45]
+                0.00    0.00      83/130         std::thread::id::id() [42]
+                0.00    0.00      83/83          std::operator==(std::thread::id, std::thread::id) [46]
+-----------------------------------------------
+                0.00    0.00      83/83          std::thread::joinable() const [45]
+[46]     0.0    0.00    0.00      83         std::operator==(std::thread::id, std::thread::id) [46]
+-----------------------------------------------
+                0.00    0.00       6/80          std::__invoke_result<main::{lambda()#5}>::type std::__invoke<main::{lambda()#5}>(main::{lambda()#5}&&) [21]
+                0.00    0.00       7/80          std::tuple_element<0ul, std::tuple<main::{lambda()#5}> >::type&& std::get<0ul, main::{lambda()#5}>(std::tuple<main::{lambda()#5}>&&) [105]
+                0.00    0.00       7/80          void std::__invoke_impl<void, main::{lambda()#5}>(std::__invoke_other, main::{lambda()#5}&&) [23]
+                0.00    0.00      10/80          std::thread::thread<main::{lambda()#5}, , void>(main::{lambda()#5}&&) [90]
+                0.00    0.00      10/80          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_State_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [82]
+                0.00    0.00      10/80          std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_Invoker<main::{lambda()#5}>(main::{lambda()#5}&&) [87]
+                0.00    0.00      10/80          std::tuple<main::{lambda()#5}>::tuple<main::{lambda()#5}, true, true>(main::{lambda()#5}&&) [79]
+                0.00    0.00      10/80          std::_Tuple_impl<0ul, main::{lambda()#5}>::_Tuple_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [75]
+                0.00    0.00      10/80          std::_Head_base<0ul, main::{lambda()#5}, false>::_Head_base<main::{lambda()#5}>(main::{lambda()#5}&&) [71]
+[47]     0.0    0.00    0.00      80         main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+-----------------------------------------------
+                0.00    0.00      39/78          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr() [58]
+                0.00    0.00      39/78          std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::__uniq_ptr_impl(std::thread::_State*) [61]
+[48]     0.0    0.00    0.00      78         std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::_M_ptr() [48]
+                0.00    0.00      77/77          std::tuple_element<0ul, std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> > >::type& std::get<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >&) [51]
+-----------------------------------------------
+                0.00    0.00       6/78          std::tuple_element<0ul, std::tuple<main::{lambda()#2}> >::type&& std::get<0ul, main::{lambda()#2}>(std::tuple<main::{lambda()#2}>&&) [104]
+                0.00    0.00       6/78          std::__invoke_result<main::{lambda()#2}>::type std::__invoke<main::{lambda()#2}>(main::{lambda()#2}&&) [6]
+                0.00    0.00       6/78          void std::__invoke_impl<void, main::{lambda()#2}>(std::__invoke_other, main::{lambda()#2}&&) [5]
+                0.00    0.00      10/78          std::thread::thread<main::{lambda()#2}, , void>(main::{lambda()#2}&&) [89]
+                0.00    0.00      10/78          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_State_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [81]
+                0.00    0.00      10/78          std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_Invoker<main::{lambda()#2}>(main::{lambda()#2}&&) [86]
+                0.00    0.00      10/78          std::tuple<main::{lambda()#2}>::tuple<main::{lambda()#2}, true, true>(main::{lambda()#2}&&) [78]
+                0.00    0.00      10/78          std::_Tuple_impl<0ul, main::{lambda()#2}>::_Tuple_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [74]
+                0.00    0.00      10/78          std::_Head_base<0ul, main::{lambda()#2}, false>::_Head_base<main::{lambda()#2}>(main::{lambda()#2}&&) [70]
+[49]     0.0    0.00    0.00      78         main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+-----------------------------------------------
+                0.00    0.00      77/77          std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_M_head(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&) [52]
+[50]     0.0    0.00    0.00      77         std::_Head_base<0ul, std::thread::_State*, false>::_M_head(std::_Head_base<0ul, std::thread::_State*, false>&) [50]
+-----------------------------------------------
+                0.00    0.00      77/77          std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::_M_ptr() [48]
+[51]     0.0    0.00    0.00      77         std::tuple_element<0ul, std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> > >::type& std::get<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >&) [51]
+                0.00    0.00      75/75          std::thread::_State*& std::__get_helper<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&) [53]
+-----------------------------------------------
+                0.00    0.00      75/75          std::thread::_State*& std::__get_helper<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&) [53]
+[52]     0.0    0.00    0.00      75         std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_M_head(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&) [52]
+                0.00    0.00      77/77          std::_Head_base<0ul, std::thread::_State*, false>::_M_head(std::_Head_base<0ul, std::thread::_State*, false>&) [50]
+-----------------------------------------------
+                0.00    0.00      75/75          std::tuple_element<0ul, std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> > >::type& std::get<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >&) [51]
+[53]     0.0    0.00    0.00      75         std::thread::_State*& std::__get_helper<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&) [53]
+                0.00    0.00      75/75          std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_M_head(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&) [52]
+-----------------------------------------------
+                0.00    0.00       3/61          void std::__invoke_impl<void, main::{lambda()#4}>(std::__invoke_other, main::{lambda()#4}&&) [28]
+                0.00    0.00       4/61          std::__invoke_result<main::{lambda()#4}>::type std::__invoke<main::{lambda()#4}>(main::{lambda()#4}&&) [29]
+                0.00    0.00       5/61          std::tuple_element<0ul, std::tuple<main::{lambda()#4}> >::type&& std::get<0ul, main::{lambda()#4}>(std::tuple<main::{lambda()#4}>&&) [117]
+                0.00    0.00       8/61          std::thread::thread<main::{lambda()#4}, , void>(main::{lambda()#4}&&) [112]
+                0.00    0.00       8/61          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_State_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [109]
+                0.00    0.00       8/61          std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_Invoker<main::{lambda()#4}>(main::{lambda()#4}&&) [101]
+                0.00    0.00       8/61          std::tuple<main::{lambda()#4}>::tuple<main::{lambda()#4}, true, true>(main::{lambda()#4}&&) [100]
+                0.00    0.00       8/61          std::_Tuple_impl<0ul, main::{lambda()#4}>::_Tuple_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [99]
+                0.00    0.00       9/61          std::_Head_base<0ul, main::{lambda()#4}, false>::_Head_base<main::{lambda()#4}>(main::{lambda()#4}&&) [96]
+[54]     0.0    0.00    0.00      61         main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+-----------------------------------------------
+                0.00    0.00      47/47          main [39]
+[55]     0.0    0.00    0.00      47         std::thread::~thread() [55]
+                0.00    0.00      47/83          std::thread::joinable() const [45]
+-----------------------------------------------
+                0.00    0.00      39/39          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::unique_ptr<std::default_delete<std::thread::_State>, void>(std::thread::_State*) [57]
+[56]     0.0    0.00    0.00      39         std::__uniq_ptr_data<std::thread::_State, std::default_delete<std::thread::_State>, true, true>::__uniq_ptr_impl(std::thread::_State*) [56]
+                0.00    0.00      38/38          std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::__uniq_ptr_impl(std::thread::_State*) [61]
+-----------------------------------------------
+                0.00    0.00       8/38          std::thread::thread<main::{lambda()#4}, , void>(main::{lambda()#4}&&) [112]
+                0.00    0.00      10/38          std::thread::thread<main::{lambda()#1}, , void>(main::{lambda()#1}&&) [91]
+                0.00    0.00      10/38          std::thread::thread<main::{lambda()#2}, , void>(main::{lambda()#2}&&) [89]
+                0.00    0.00      10/38          std::thread::thread<main::{lambda()#5}, , void>(main::{lambda()#5}&&) [90]
+[57]     0.0    0.00    0.00      38         std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::unique_ptr<std::default_delete<std::thread::_State>, void>(std::thread::_State*) [57]
+                0.00    0.00      39/39          std::__uniq_ptr_data<std::thread::_State, std::default_delete<std::thread::_State>, true, true>::__uniq_ptr_impl(std::thread::_State*) [56]
+-----------------------------------------------
+                0.00    0.00       8/38          std::thread::thread<main::{lambda()#4}, , void>(main::{lambda()#4}&&) [112]
+                0.00    0.00      10/38          std::thread::thread<main::{lambda()#1}, , void>(main::{lambda()#1}&&) [91]
+                0.00    0.00      10/38          std::thread::thread<main::{lambda()#2}, , void>(main::{lambda()#2}&&) [89]
+                0.00    0.00      10/38          std::thread::thread<main::{lambda()#5}, , void>(main::{lambda()#5}&&) [90]
+[58]     0.0    0.00    0.00      38         std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr() [58]
+                0.00    0.00      39/78          std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::_M_ptr() [48]
+-----------------------------------------------
+                0.00    0.00      38/38          std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >::tuple<true, true>() [62]
+[59]     0.0    0.00    0.00      38         std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_Tuple_impl() [59]
+                0.00    0.00      38/38          std::_Tuple_impl<1ul, std::default_delete<std::thread::_State> >::_Tuple_impl() [60]
+                0.00    0.00      37/37          std::_Head_base<0ul, std::thread::_State*, false>::_Head_base() [63]
+-----------------------------------------------
+                0.00    0.00      38/38          std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_Tuple_impl() [59]
+[60]     0.0    0.00    0.00      38         std::_Tuple_impl<1ul, std::default_delete<std::thread::_State> >::_Tuple_impl() [60]
+                0.00    0.00      37/37          std::_Head_base<1ul, std::default_delete<std::thread::_State>, true>::_Head_base() [64]
+-----------------------------------------------
+                0.00    0.00      38/38          std::__uniq_ptr_data<std::thread::_State, std::default_delete<std::thread::_State>, true, true>::__uniq_ptr_impl(std::thread::_State*) [56]
+[61]     0.0    0.00    0.00      38         std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::__uniq_ptr_impl(std::thread::_State*) [61]
+                0.00    0.00      39/78          std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::_M_ptr() [48]
+                0.00    0.00      38/38          std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >::tuple<true, true>() [62]
+-----------------------------------------------
+                0.00    0.00      38/38          std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::__uniq_ptr_impl(std::thread::_State*) [61]
+[62]     0.0    0.00    0.00      38         std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >::tuple<true, true>() [62]
+                0.00    0.00      38/38          std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_Tuple_impl() [59]
+-----------------------------------------------
+                0.00    0.00      37/37          std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_Tuple_impl() [59]
+[63]     0.0    0.00    0.00      37         std::_Head_base<0ul, std::thread::_State*, false>::_Head_base() [63]
+-----------------------------------------------
+                0.00    0.00      37/37          std::_Tuple_impl<1ul, std::default_delete<std::thread::_State> >::_Tuple_impl() [60]
+[64]     0.0    0.00    0.00      37         std::_Head_base<1ul, std::default_delete<std::thread::_State>, true>::_Head_base() [64]
+-----------------------------------------------
+                0.00    0.00       7/37          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_State_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [109]
+                0.00    0.00      10/37          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_State_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [84]
+                0.00    0.00      10/37          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_State_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [81]
+                0.00    0.00      10/37          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_State_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [82]
+[65]     0.0    0.00    0.00      37         std::thread::_State::_State() [65]
+-----------------------------------------------
+                0.00    0.00      36/36          std::thread::operator=(std::thread&&) [67]
+[66]     0.0    0.00    0.00      36         std::thread::swap(std::thread&) [66]
+                0.00    0.00      36/36          std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<std::thread::id> >, std::is_move_constructible<std::thread::id>, std::is_move_assignable<std::thread::id> >::value, void>::type std::swap<std::thread::id>(std::thread::id&, std::thread::id&) [68]
+-----------------------------------------------
+                0.00    0.00      36/36          main [39]
+[67]     0.0    0.00    0.00      36         std::thread::operator=(std::thread&&) [67]
+                0.00    0.00      36/83          std::thread::joinable() const [45]
+                0.00    0.00      36/36          std::thread::swap(std::thread&) [66]
+-----------------------------------------------
+                0.00    0.00      36/36          std::thread::swap(std::thread&) [66]
+[68]     0.0    0.00    0.00      36         std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<std::thread::id> >, std::is_move_constructible<std::thread::id>, std::is_move_assignable<std::thread::id> >::value, void>::type std::swap<std::thread::id>(std::thread::id&, std::thread::id&) [68]
+                0.00    0.00     108/108         std::remove_reference<std::thread::id&>::type&& std::move<std::thread::id&>(std::thread::id&) [43]
+-----------------------------------------------
+                0.00    0.00      10/10          main::{lambda()#2}::operator()() const [4]
+[69]     0.0    0.00    0.00      10         mutation(int*, int) [69]
+-----------------------------------------------
+                0.00    0.00      10/10          std::_Tuple_impl<0ul, main::{lambda()#2}>::_Tuple_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [74]
+[70]     0.0    0.00    0.00      10         std::_Head_base<0ul, main::{lambda()#2}, false>::_Head_base<main::{lambda()#2}>(main::{lambda()#2}&&) [70]
+                0.00    0.00      10/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+-----------------------------------------------
+                0.00    0.00      10/10          std::_Tuple_impl<0ul, main::{lambda()#5}>::_Tuple_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [75]
+[71]     0.0    0.00    0.00      10         std::_Head_base<0ul, main::{lambda()#5}, false>::_Head_base<main::{lambda()#5}>(main::{lambda()#5}&&) [71]
+                0.00    0.00      10/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+-----------------------------------------------
+                0.00    0.00      10/10          std::_Tuple_impl<0ul, main::{lambda()#1}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#1}>&) [76]
+[72]     0.0    0.00    0.00      10         std::_Head_base<0ul, main::{lambda()#1}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#1}, false>&) [72]
+-----------------------------------------------
+                0.00    0.00      10/10          std::_Tuple_impl<0ul, main::{lambda()#1}>::_Tuple_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [77]
+[73]     0.0    0.00    0.00      10         std::_Head_base<0ul, main::{lambda()#1}, false>::_Head_base<main::{lambda()#1}>(main::{lambda()#1}&&) [73]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+-----------------------------------------------
+                0.00    0.00      10/10          std::tuple<main::{lambda()#2}>::tuple<main::{lambda()#2}, true, true>(main::{lambda()#2}&&) [78]
+[74]     0.0    0.00    0.00      10         std::_Tuple_impl<0ul, main::{lambda()#2}>::_Tuple_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [74]
+                0.00    0.00      10/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+                0.00    0.00      10/10          std::_Head_base<0ul, main::{lambda()#2}, false>::_Head_base<main::{lambda()#2}>(main::{lambda()#2}&&) [70]
+-----------------------------------------------
+                0.00    0.00      10/10          std::tuple<main::{lambda()#5}>::tuple<main::{lambda()#5}, true, true>(main::{lambda()#5}&&) [79]
+[75]     0.0    0.00    0.00      10         std::_Tuple_impl<0ul, main::{lambda()#5}>::_Tuple_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [75]
+                0.00    0.00      10/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+                0.00    0.00      10/10          std::_Head_base<0ul, main::{lambda()#5}, false>::_Head_base<main::{lambda()#5}>(main::{lambda()#5}&&) [71]
+-----------------------------------------------
+                0.00    0.00      10/10          main::{lambda()#1}& std::__get_helper<0ul, main::{lambda()#1}>(std::_Tuple_impl<0ul, main::{lambda()#1}>&) [93]
+[76]     0.0    0.00    0.00      10         std::_Tuple_impl<0ul, main::{lambda()#1}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#1}>&) [76]
+                0.00    0.00      10/10          std::_Head_base<0ul, main::{lambda()#1}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#1}, false>&) [72]
+-----------------------------------------------
+                0.00    0.00      10/10          std::tuple<main::{lambda()#1}>::tuple<main::{lambda()#1}, true, true>(main::{lambda()#1}&&) [80]
+[77]     0.0    0.00    0.00      10         std::_Tuple_impl<0ul, main::{lambda()#1}>::_Tuple_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [77]
+                0.00    0.00      10/10          std::_Head_base<0ul, main::{lambda()#1}, false>::_Head_base<main::{lambda()#1}>(main::{lambda()#1}&&) [73]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_Invoker<main::{lambda()#2}>(main::{lambda()#2}&&) [86]
+[78]     0.0    0.00    0.00      10         std::tuple<main::{lambda()#2}>::tuple<main::{lambda()#2}, true, true>(main::{lambda()#2}&&) [78]
+                0.00    0.00      10/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+                0.00    0.00      10/10          std::_Tuple_impl<0ul, main::{lambda()#2}>::_Tuple_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [74]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_Invoker<main::{lambda()#5}>(main::{lambda()#5}&&) [87]
+[79]     0.0    0.00    0.00      10         std::tuple<main::{lambda()#5}>::tuple<main::{lambda()#5}, true, true>(main::{lambda()#5}&&) [79]
+                0.00    0.00      10/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+                0.00    0.00      10/10          std::_Tuple_impl<0ul, main::{lambda()#5}>::_Tuple_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [75]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_Invoker<main::{lambda()#1}>(main::{lambda()#1}&&) [88]
+[80]     0.0    0.00    0.00      10         std::tuple<main::{lambda()#1}>::tuple<main::{lambda()#1}, true, true>(main::{lambda()#1}&&) [80]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+                0.00    0.00      10/10          std::_Tuple_impl<0ul, main::{lambda()#1}>::_Tuple_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [77]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::thread<main::{lambda()#2}, , void>(main::{lambda()#2}&&) [89]
+[81]     0.0    0.00    0.00      10         std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_State_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [81]
+                0.00    0.00      10/37          std::thread::_State::_State() [65]
+                0.00    0.00      10/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+                0.00    0.00      10/10          std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_Invoker<main::{lambda()#2}>(main::{lambda()#2}&&) [86]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::thread<main::{lambda()#5}, , void>(main::{lambda()#5}&&) [90]
+[82]     0.0    0.00    0.00      10         std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_State_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [82]
+                0.00    0.00      10/37          std::thread::_State::_State() [65]
+                0.00    0.00      10/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+                0.00    0.00      10/10          std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_Invoker<main::{lambda()#5}>(main::{lambda()#5}&&) [87]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::~_State_impl() [147]
+[83]     0.0    0.00    0.00      10         std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::~_State_impl() [83]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::thread<main::{lambda()#1}, , void>(main::{lambda()#1}&&) [91]
+[84]     0.0    0.00    0.00      10         std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_State_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [84]
+                0.00    0.00      10/37          std::thread::_State::_State() [65]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+                0.00    0.00      10/10          std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_Invoker<main::{lambda()#1}>(main::{lambda()#1}&&) [88]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::~_State_impl() [148]
+[85]     0.0    0.00    0.00      10         std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::~_State_impl() [85]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_State_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [81]
+[86]     0.0    0.00    0.00      10         std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_Invoker<main::{lambda()#2}>(main::{lambda()#2}&&) [86]
+                0.00    0.00      10/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+                0.00    0.00      10/10          std::tuple<main::{lambda()#2}>::tuple<main::{lambda()#2}, true, true>(main::{lambda()#2}&&) [78]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_State_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [82]
+[87]     0.0    0.00    0.00      10         std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_Invoker<main::{lambda()#5}>(main::{lambda()#5}&&) [87]
+                0.00    0.00      10/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+                0.00    0.00      10/10          std::tuple<main::{lambda()#5}>::tuple<main::{lambda()#5}, true, true>(main::{lambda()#5}&&) [79]
+-----------------------------------------------
+                0.00    0.00      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_State_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [84]
+[88]     0.0    0.00    0.00      10         std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_Invoker<main::{lambda()#1}>(main::{lambda()#1}&&) [88]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+                0.00    0.00      10/10          std::tuple<main::{lambda()#1}>::tuple<main::{lambda()#1}, true, true>(main::{lambda()#1}&&) [80]
+-----------------------------------------------
+                0.00    0.00      10/10          main [39]
+[89]     0.0    0.00    0.00      10         std::thread::thread<main::{lambda()#2}, , void>(main::{lambda()#2}&&) [89]
+                0.00    0.00      10/130         std::thread::id::id() [42]
+                0.00    0.00      10/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+                0.00    0.00      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_State_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [81]
+                0.00    0.00      10/38          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::unique_ptr<std::default_delete<std::thread::_State>, void>(std::thread::_State*) [57]
+                0.00    0.00      10/38          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr() [58]
+-----------------------------------------------
+                0.00    0.00      10/10          main [39]
+[90]     0.0    0.00    0.00      10         std::thread::thread<main::{lambda()#5}, , void>(main::{lambda()#5}&&) [90]
+                0.00    0.00      10/130         std::thread::id::id() [42]
+                0.00    0.00      10/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+                0.00    0.00      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_State_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [82]
+                0.00    0.00      10/38          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::unique_ptr<std::default_delete<std::thread::_State>, void>(std::thread::_State*) [57]
+                0.00    0.00      10/38          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr() [58]
+-----------------------------------------------
+                0.00    0.00      10/10          main [39]
+[91]     0.0    0.00    0.00      10         std::thread::thread<main::{lambda()#1}, , void>(main::{lambda()#1}&&) [91]
+                0.00    0.00      10/130         std::thread::id::id() [42]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+                0.00    0.00      10/10          std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_State_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [84]
+                0.00    0.00      10/38          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::unique_ptr<std::default_delete<std::thread::_State>, void>(std::thread::_State*) [57]
+                0.00    0.00      10/38          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr() [58]
+-----------------------------------------------
+                0.00    0.00      10/10          main [39]
+[92]     0.0    0.00    0.00      10         std::thread::thread() [92]
+                0.00    0.00      10/130         std::thread::id::id() [42]
+-----------------------------------------------
+                0.00    0.00      10/10          std::tuple_element<0ul, std::tuple<main::{lambda()#1}> >::type&& std::get<0ul, main::{lambda()#1}>(std::tuple<main::{lambda()#1}>&&) [94]
+[93]     0.0    0.00    0.00      10         main::{lambda()#1}& std::__get_helper<0ul, main::{lambda()#1}>(std::_Tuple_impl<0ul, main::{lambda()#1}>&) [93]
+                0.00    0.00      10/10          std::_Tuple_impl<0ul, main::{lambda()#1}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#1}>&) [76]
+-----------------------------------------------
+                0.00    0.00      10/10          void std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [11]
+[94]     0.0    0.00    0.00      10         std::tuple_element<0ul, std::tuple<main::{lambda()#1}> >::type&& std::get<0ul, main::{lambda()#1}>(std::tuple<main::{lambda()#1}>&&) [94]
+                0.00    0.00      10/10          main::{lambda()#1}& std::__get_helper<0ul, main::{lambda()#1}>(std::_Tuple_impl<0ul, main::{lambda()#1}>&) [93]
+                0.00    0.00      10/90          main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&) [44]
+-----------------------------------------------
+                0.00    0.00      10/10          void std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [11]
+[95]     0.0    0.00    0.00      10         std::remove_reference<std::tuple<main::{lambda()#1}>&>::type&& std::move<std::tuple<main::{lambda()#1}>&>(std::tuple<main::{lambda()#1}>&) [95]
+-----------------------------------------------
+                0.00    0.00       9/9           std::_Tuple_impl<0ul, main::{lambda()#4}>::_Tuple_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [99]
+[96]     0.0    0.00    0.00       9         std::_Head_base<0ul, main::{lambda()#4}, false>::_Head_base<main::{lambda()#4}>(main::{lambda()#4}&&) [96]
+                0.00    0.00       9/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+-----------------------------------------------
+                0.00    0.00       9/9           std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::~_State_impl() [141]
+[97]     0.0    0.00    0.00       9         std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::~_State_impl() [97]
+-----------------------------------------------
+                0.00    0.00       8/8           main::{lambda()#2}& std::__get_helper<0ul, main::{lambda()#2}>(std::_Tuple_impl<0ul, main::{lambda()#2}>&) [102]
+[98]     0.0    0.00    0.00       8         std::_Tuple_impl<0ul, main::{lambda()#2}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#2}>&) [98]
+                0.00    0.00       7/7           std::_Head_base<0ul, main::{lambda()#2}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#2}, false>&) [107]
+-----------------------------------------------
+                0.00    0.00       8/8           std::tuple<main::{lambda()#4}>::tuple<main::{lambda()#4}, true, true>(main::{lambda()#4}&&) [100]
+[99]     0.0    0.00    0.00       8         std::_Tuple_impl<0ul, main::{lambda()#4}>::_Tuple_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [99]
+                0.00    0.00       9/9           std::_Head_base<0ul, main::{lambda()#4}, false>::_Head_base<main::{lambda()#4}>(main::{lambda()#4}&&) [96]
+                0.00    0.00       8/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+-----------------------------------------------
+                0.00    0.00       8/8           std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_Invoker<main::{lambda()#4}>(main::{lambda()#4}&&) [101]
+[100]    0.0    0.00    0.00       8         std::tuple<main::{lambda()#4}>::tuple<main::{lambda()#4}, true, true>(main::{lambda()#4}&&) [100]
+                0.00    0.00       8/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+                0.00    0.00       8/8           std::_Tuple_impl<0ul, main::{lambda()#4}>::_Tuple_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [99]
+-----------------------------------------------
+                0.00    0.00       8/8           std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_State_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [109]
+[101]    0.0    0.00    0.00       8         std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_Invoker<main::{lambda()#4}>(main::{lambda()#4}&&) [101]
+                0.00    0.00       8/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+                0.00    0.00       8/8           std::tuple<main::{lambda()#4}>::tuple<main::{lambda()#4}, true, true>(main::{lambda()#4}&&) [100]
+-----------------------------------------------
+                0.00    0.00       8/8           std::tuple_element<0ul, std::tuple<main::{lambda()#2}> >::type&& std::get<0ul, main::{lambda()#2}>(std::tuple<main::{lambda()#2}>&&) [104]
+[102]    0.0    0.00    0.00       8         main::{lambda()#2}& std::__get_helper<0ul, main::{lambda()#2}>(std::_Tuple_impl<0ul, main::{lambda()#2}>&) [102]
+                0.00    0.00       8/8           std::_Tuple_impl<0ul, main::{lambda()#2}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#2}>&) [98]
+-----------------------------------------------
+                0.00    0.00       8/8           std::tuple_element<0ul, std::tuple<main::{lambda()#5}> >::type&& std::get<0ul, main::{lambda()#5}>(std::tuple<main::{lambda()#5}>&&) [105]
+[103]    0.0    0.00    0.00       8         main::{lambda()#5}& std::__get_helper<0ul, main::{lambda()#5}>(std::_Tuple_impl<0ul, main::{lambda()#5}>&) [103]
+                0.00    0.00       7/7           std::_Tuple_impl<0ul, main::{lambda()#5}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#5}>&) [108]
+-----------------------------------------------
+                0.00    0.00       8/8           void std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [2]
+[104]    0.0    0.00    0.00       8         std::tuple_element<0ul, std::tuple<main::{lambda()#2}> >::type&& std::get<0ul, main::{lambda()#2}>(std::tuple<main::{lambda()#2}>&&) [104]
+                0.00    0.00       8/8           main::{lambda()#2}& std::__get_helper<0ul, main::{lambda()#2}>(std::_Tuple_impl<0ul, main::{lambda()#2}>&) [102]
+                0.00    0.00       6/78          main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&) [49]
+-----------------------------------------------
+                0.00    0.00       8/8           void std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [19]
+[105]    0.0    0.00    0.00       8         std::tuple_element<0ul, std::tuple<main::{lambda()#5}> >::type&& std::get<0ul, main::{lambda()#5}>(std::tuple<main::{lambda()#5}>&&) [105]
+                0.00    0.00       8/8           main::{lambda()#5}& std::__get_helper<0ul, main::{lambda()#5}>(std::_Tuple_impl<0ul, main::{lambda()#5}>&) [103]
+                0.00    0.00       7/80          main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&) [47]
+-----------------------------------------------
+                0.00    0.00       8/8           void std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [2]
+[106]    0.0    0.00    0.00       8         std::remove_reference<std::tuple<main::{lambda()#2}>&>::type&& std::move<std::tuple<main::{lambda()#2}>&>(std::tuple<main::{lambda()#2}>&) [106]
+-----------------------------------------------
+                0.00    0.00       7/7           std::_Tuple_impl<0ul, main::{lambda()#2}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#2}>&) [98]
+[107]    0.0    0.00    0.00       7         std::_Head_base<0ul, main::{lambda()#2}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#2}, false>&) [107]
+-----------------------------------------------
+                0.00    0.00       7/7           main::{lambda()#5}& std::__get_helper<0ul, main::{lambda()#5}>(std::_Tuple_impl<0ul, main::{lambda()#5}>&) [103]
+[108]    0.0    0.00    0.00       7         std::_Tuple_impl<0ul, main::{lambda()#5}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#5}>&) [108]
+                0.00    0.00       6/6           std::_Head_base<0ul, main::{lambda()#5}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#5}, false>&) [111]
+-----------------------------------------------
+                0.00    0.00       7/7           std::thread::thread<main::{lambda()#4}, , void>(main::{lambda()#4}&&) [112]
+[109]    0.0    0.00    0.00       7         std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_State_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [109]
+                0.00    0.00       8/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+                0.00    0.00       8/8           std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_Invoker<main::{lambda()#4}>(main::{lambda()#4}&&) [101]
+                0.00    0.00       7/37          std::thread::_State::_State() [65]
+-----------------------------------------------
+                0.00    0.00       7/7           void std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [19]
+[110]    0.0    0.00    0.00       7         std::remove_reference<std::tuple<main::{lambda()#5}>&>::type&& std::move<std::tuple<main::{lambda()#5}>&>(std::tuple<main::{lambda()#5}>&) [110]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Tuple_impl<0ul, main::{lambda()#5}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#5}>&) [108]
+[111]    0.0    0.00    0.00       6         std::_Head_base<0ul, main::{lambda()#5}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#5}, false>&) [111]
+-----------------------------------------------
+                0.00    0.00       6/6           main [39]
+[112]    0.0    0.00    0.00       6         std::thread::thread<main::{lambda()#4}, , void>(main::{lambda()#4}&&) [112]
+                0.00    0.00       8/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+                0.00    0.00       8/38          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::unique_ptr<std::default_delete<std::thread::_State>, void>(std::thread::_State*) [57]
+                0.00    0.00       8/38          std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr() [58]
+                0.00    0.00       7/130         std::thread::id::id() [42]
+                0.00    0.00       7/7           std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_State_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [109]
+-----------------------------------------------
+                0.00    0.00       5/5           std::tuple_element<0ul, std::tuple<main::{lambda()#4}> >::type&& std::get<0ul, main::{lambda()#4}>(std::tuple<main::{lambda()#4}>&&) [117]
+[113]    0.0    0.00    0.00       5         main::{lambda()#4}& std::__get_helper<0ul, main::{lambda()#4}>(std::_Tuple_impl<0ul, main::{lambda()#4}>&) [113]
+                0.00    0.00       4/4           std::_Tuple_impl<0ul, main::{lambda()#4}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#4}>&) [115]
+-----------------------------------------------
+                0.00    0.00       4/4           std::_Tuple_impl<0ul, main::{lambda()#4}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#4}>&) [115]
+[114]    0.0    0.00    0.00       4         std::_Head_base<0ul, main::{lambda()#4}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#4}, false>&) [114]
+-----------------------------------------------
+                0.00    0.00       4/4           main::{lambda()#4}& std::__get_helper<0ul, main::{lambda()#4}>(std::_Tuple_impl<0ul, main::{lambda()#4}>&) [113]
+[115]    0.0    0.00    0.00       4         std::_Tuple_impl<0ul, main::{lambda()#4}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#4}>&) [115]
+                0.00    0.00       4/4           std::_Head_base<0ul, main::{lambda()#4}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#4}, false>&) [114]
+-----------------------------------------------
+                0.00    0.00       4/4           std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::~_State_impl() [146]
+[116]    0.0    0.00    0.00       4         std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::~_State_impl() [116]
+-----------------------------------------------
+                0.00    0.00       4/4           void std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [31]
+[117]    0.0    0.00    0.00       4         std::tuple_element<0ul, std::tuple<main::{lambda()#4}> >::type&& std::get<0ul, main::{lambda()#4}>(std::tuple<main::{lambda()#4}>&&) [117]
+                0.00    0.00       5/5           main::{lambda()#4}& std::__get_helper<0ul, main::{lambda()#4}>(std::_Tuple_impl<0ul, main::{lambda()#4}>&) [113]
+                0.00    0.00       5/61          main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&) [54]
+-----------------------------------------------
+                0.00    0.00       1/3           std::chrono::duration<long, std::ratio<1l, 1000l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1000l> >, std::ratio<1l, 1000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [125]
+                0.00    0.00       2/3           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [129]
+[118]    0.0    0.00    0.00       3         std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const [118]
+-----------------------------------------------
+                0.00    0.00       3/3           void std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [31]
+[119]    0.0    0.00    0.00       3         std::remove_reference<std::tuple<main::{lambda()#4}>&>::type&& std::move<std::tuple<main::{lambda()#4}>&>(std::tuple<main::{lambda()#4}>&) [119]
+-----------------------------------------------
+                0.00    0.00       2/2           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [128]
+[120]    0.0    0.00    0.00       2         std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const [120]
+-----------------------------------------------
+                0.00    0.00       1/1           main [39]
+[121]    0.0    0.00    0.00       1         save_best_solution(int*, int*) [121]
+-----------------------------------------------
+                0.00    0.00       1/1           main [39]
+[122]    0.0    0.00    0.00       1         load_data(int*, char*) [122]
+-----------------------------------------------
+                0.00    0.00       1/1           main [39]
+[123]    0.0    0.00    0.00       1         std::chrono::duration<long, std::ratio<1l, 1000l> >::count() const [123]
+-----------------------------------------------
+                0.00    0.00       1/1           main [39]
+[124]    0.0    0.00    0.00       1         std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1000l> > >::value, std::chrono::duration<long, std::ratio<1l, 1000l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1000l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [124]
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1000l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1000l> >, std::ratio<1l, 1000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [125]
+-----------------------------------------------
+                0.00    0.00       1/1           std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1000l> > >::value, std::chrono::duration<long, std::ratio<1l, 1000l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1000l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [124]
+[125]    0.0    0.00    0.00       1         std::chrono::duration<long, std::ratio<1l, 1000l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1000l> >, std::ratio<1l, 1000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [125]
+                0.00    0.00       1/3           std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const [118]
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1000l> >::duration<long, void>(long const&) [127]
+-----------------------------------------------
+                0.00    0.00       1/1           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [129]
+[126]    0.0    0.00    0.00       1         std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&) [126]
+-----------------------------------------------
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1000l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1000l> >, std::ratio<1l, 1000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [125]
+[127]    0.0    0.00    0.00       1         std::chrono::duration<long, std::ratio<1l, 1000l> >::duration<long, void>(long const&) [127]
+-----------------------------------------------
+                0.00    0.00       1/1           main [39]
+[128]    0.0    0.00    0.00       1         std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [128]
+                0.00    0.00       2/2           std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const [120]
+                0.00    0.00       1/1           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [129]
+-----------------------------------------------
+                0.00    0.00       1/1           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [128]
+[129]    0.0    0.00    0.00       1         std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [129]
+                0.00    0.00       2/3           std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const [118]
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&) [126]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+   [1] genetic_step(int*, double*, double*, int) [48] std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::_M_ptr() [92] std::thread::thread()
+  [17] random_shuffle(int*, int) [61] std::__uniq_ptr_impl<std::thread::_State, std::default_delete<std::thread::_State> >::__uniq_ptr_impl(std::thread::_State*) [55] std::thread::~thread()
+  [10] fit_sort_subpop(int*, double*) [62] std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >::tuple<true, true>() [67] std::thread::operator=(std::thread&&)
+  [26] calculate_scores(int*, double*, double*, double*, int) [78] std::tuple<main::{lambda()#2}>::tuple<main::{lambda()#2}, true, true>(main::{lambda()#2}&&) [53] std::thread::_State*& std::__get_helper<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&)
+  [25] calculate_distance(int*, double*) [100] std::tuple<main::{lambda()#4}>::tuple<main::{lambda()#4}, true, true>(main::{lambda()#4}&&) [102] main::{lambda()#2}& std::__get_helper<0ul, main::{lambda()#2}>(std::_Tuple_impl<0ul, main::{lambda()#2}>&)
+   [9] distance_crossover(int*, int*, int*, double*) [79] std::tuple<main::{lambda()#5}>::tuple<main::{lambda()#5}, true, true>(main::{lambda()#5}&&) [113] main::{lambda()#4}& std::__get_helper<0ul, main::{lambda()#4}>(std::_Tuple_impl<0ul, main::{lambda()#4}>&)
+ [121] save_best_solution(int*, int*) [80] std::tuple<main::{lambda()#1}>::tuple<main::{lambda()#1}, true, true>(main::{lambda()#1}&&) [103] main::{lambda()#5}& std::__get_helper<0ul, main::{lambda()#5}>(std::_Tuple_impl<0ul, main::{lambda()#5}>&)
+  [20] fit_sort(int*, double*, int) [124] std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1000l> > >::value, std::chrono::duration<long, std::ratio<1l, 1000l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1000l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [93] main::{lambda()#1}& std::__get_helper<0ul, main::{lambda()#1}>(std::_Tuple_impl<0ul, main::{lambda()#1}>&)
+  [69] mutation(int*, int)   [125] std::chrono::duration<long, std::ratio<1l, 1000l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1000l> >, std::ratio<1l, 1000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [5] void std::__invoke_impl<void, main::{lambda()#2}>(std::__invoke_other, main::{lambda()#2}&&)
+   [8] crossover(int*, double*, int) [126] std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&) [28] void std::__invoke_impl<void, main::{lambda()#4}>(std::__invoke_other, main::{lambda()#4}&&)
+ [122] load_data(int*, char*) [127] std::chrono::duration<long, std::ratio<1l, 1000l> >::duration<long, void>(long const&) [23] void std::__invoke_impl<void, main::{lambda()#5}>(std::__invoke_other, main::{lambda()#5}&&)
+ [120] std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const [128] std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [13] void std::__invoke_impl<void, main::{lambda()#1}>(std::__invoke_other, main::{lambda()#1}&&)
+ [118] std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const [129] std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [51] std::tuple_element<0ul, std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> > >::type& std::get<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >(std::tuple<std::thread::_State*, std::default_delete<std::thread::_State> >&)
+ [123] std::chrono::duration<long, std::ratio<1l, 1000l> >::count() const [81] std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_State_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [104] std::tuple_element<0ul, std::tuple<main::{lambda()#2}> >::type&& std::get<0ul, main::{lambda()#2}>(std::tuple<main::{lambda()#2}>&&)
+  [45] std::thread::joinable() const [97] std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::~_State_impl() [117] std::tuple_element<0ul, std::tuple<main::{lambda()#4}> >::type&& std::get<0ul, main::{lambda()#4}>(std::tuple<main::{lambda()#4}>&&)
+  [50] std::_Head_base<0ul, std::thread::_State*, false>::_M_head(std::_Head_base<0ul, std::thread::_State*, false>&) [109] std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::_State_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [105] std::tuple_element<0ul, std::tuple<main::{lambda()#5}> >::type&& std::get<0ul, main::{lambda()#5}>(std::tuple<main::{lambda()#5}>&&)
+  [63] std::_Head_base<0ul, std::thread::_State*, false>::_Head_base() [116] std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#4}> > >::~_State_impl() [94] std::tuple_element<0ul, std::tuple<main::{lambda()#1}> >::type&& std::get<0ul, main::{lambda()#1}>(std::tuple<main::{lambda()#1}>&&)
+ [107] std::_Head_base<0ul, main::{lambda()#2}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#2}, false>&) [82] std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::_State_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [41] __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int)
+  [70] std::_Head_base<0ul, main::{lambda()#2}, false>::_Head_base<main::{lambda()#2}>(main::{lambda()#2}&&) [83] std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#5}> > >::~_State_impl() [43] std::remove_reference<std::thread::id&>::type&& std::move<std::thread::id&>(std::thread::id&)
+ [114] std::_Head_base<0ul, main::{lambda()#4}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#4}, false>&) [84] std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::_State_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [106] std::remove_reference<std::tuple<main::{lambda()#2}>&>::type&& std::move<std::tuple<main::{lambda()#2}>&>(std::tuple<main::{lambda()#2}>&)
+  [96] std::_Head_base<0ul, main::{lambda()#4}, false>::_Head_base<main::{lambda()#4}>(main::{lambda()#4}&&) [85] std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#1}> > >::~_State_impl() [119] std::remove_reference<std::tuple<main::{lambda()#4}>&>::type&& std::move<std::tuple<main::{lambda()#4}>&>(std::tuple<main::{lambda()#4}>&)
+ [111] std::_Head_base<0ul, main::{lambda()#5}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#5}, false>&) [42] std::thread::id::id() [110] std::remove_reference<std::tuple<main::{lambda()#5}>&>::type&& std::move<std::tuple<main::{lambda()#5}>&>(std::tuple<main::{lambda()#5}>&)
+  [71] std::_Head_base<0ul, main::{lambda()#5}, false>::_Head_base<main::{lambda()#5}>(main::{lambda()#5}&&) [66] std::thread::swap(std::thread&) [95] std::remove_reference<std::tuple<main::{lambda()#1}>&>::type&& std::move<std::tuple<main::{lambda()#1}>&>(std::tuple<main::{lambda()#1}>&)
+  [72] std::_Head_base<0ul, main::{lambda()#1}, false>::_M_head(std::_Head_base<0ul, main::{lambda()#1}, false>&) [65] std::thread::_State::_State() [68] std::enable_if<std::__and_<std::__not_<std::__is_tuple_like<std::thread::id> >, std::is_move_constructible<std::thread::id>, std::is_move_assignable<std::thread::id> >::value, void>::type std::swap<std::thread::id>(std::thread::id&, std::thread::id&)
+  [73] std::_Head_base<0ul, main::{lambda()#1}, false>::_Head_base<main::{lambda()#1}>(main::{lambda()#1}&&) [2] void std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [49] main::{lambda()#2}&& std::forward<main::{lambda()#2}>(std::remove_reference<main::{lambda()#2}>::type&)
+  [64] std::_Head_base<1ul, std::default_delete<std::thread::_State>, true>::_Head_base() [86] std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::_Invoker<main::{lambda()#2}>(main::{lambda()#2}&&) [54] main::{lambda()#4}&& std::forward<main::{lambda()#4}>(std::remove_reference<main::{lambda()#4}>::type&)
+  [57] std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::unique_ptr<std::default_delete<std::thread::_State>, void>(std::thread::_State*) [3] std::thread::_Invoker<std::tuple<main::{lambda()#2}> >::operator()() [47] main::{lambda()#5}&& std::forward<main::{lambda()#5}>(std::remove_reference<main::{lambda()#5}>::type&)
+  [58] std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr() [31] void std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [44] main::{lambda()#1}&& std::forward<main::{lambda()#1}>(std::remove_reference<main::{lambda()#1}>::type&)
+  [52] std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_M_head(std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >&) [101] std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::_Invoker<main::{lambda()#4}>(main::{lambda()#4}&&) [6] std::__invoke_result<main::{lambda()#2}>::type std::__invoke<main::{lambda()#2}>(main::{lambda()#2}&&)
+  [59] std::_Tuple_impl<0ul, std::thread::_State*, std::default_delete<std::thread::_State> >::_Tuple_impl() [32] std::thread::_Invoker<std::tuple<main::{lambda()#4}> >::operator()() [29] std::__invoke_result<main::{lambda()#4}>::type std::__invoke<main::{lambda()#4}>(main::{lambda()#4}&&)
+  [98] std::_Tuple_impl<0ul, main::{lambda()#2}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#2}>&) [19] void std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [21] std::__invoke_result<main::{lambda()#5}>::type std::__invoke<main::{lambda()#5}>(main::{lambda()#5}&&)
+  [74] std::_Tuple_impl<0ul, main::{lambda()#2}>::_Tuple_impl<main::{lambda()#2}>(main::{lambda()#2}&&) [87] std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::_Invoker<main::{lambda()#5}>(main::{lambda()#5}&&) [14] std::__invoke_result<main::{lambda()#1}>::type std::__invoke<main::{lambda()#1}>(main::{lambda()#1}&&)
+ [115] std::_Tuple_impl<0ul, main::{lambda()#4}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#4}>&) [18] std::thread::_Invoker<std::tuple<main::{lambda()#5}> >::operator()() [46] std::operator==(std::thread::id, std::thread::id)
+  [99] std::_Tuple_impl<0ul, main::{lambda()#4}>::_Tuple_impl<main::{lambda()#4}>(main::{lambda()#4}&&) [11] void std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) [4] main::{lambda()#2}::operator()() const
+ [108] std::_Tuple_impl<0ul, main::{lambda()#5}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#5}>&) [88] std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::_Invoker<main::{lambda()#1}>(main::{lambda()#1}&&) [30] main::{lambda()#4}::operator()() const
+  [75] std::_Tuple_impl<0ul, main::{lambda()#5}>::_Tuple_impl<main::{lambda()#5}>(main::{lambda()#5}&&) [12] std::thread::_Invoker<std::tuple<main::{lambda()#1}> >::operator()() [22] main::{lambda()#5}::operator()() const
+  [76] std::_Tuple_impl<0ul, main::{lambda()#1}>::_M_head(std::_Tuple_impl<0ul, main::{lambda()#1}>&) [89] std::thread::thread<main::{lambda()#2}, , void>(main::{lambda()#2}&&) [15] main::{lambda()#1}::operator()() const
+  [77] std::_Tuple_impl<0ul, main::{lambda()#1}>::_Tuple_impl<main::{lambda()#1}>(main::{lambda()#1}&&) [112] std::thread::thread<main::{lambda()#4}, , void>(main::{lambda()#4}&&) [27] _init
+  [60] std::_Tuple_impl<1ul, std::default_delete<std::thread::_State> >::_Tuple_impl() [90] std::thread::thread<main::{lambda()#5}, , void>(main::{lambda()#5}&&)
+  [56] std::__uniq_ptr_data<std::thread::_State, std::default_delete<std::thread::_State>, true, true>::__uniq_ptr_impl(std::thread::_State*) [91] std::thread::thread<main::{lambda()#1}, , void>(main::{lambda()#1}&&)
