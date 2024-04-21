@@ -8,10 +8,10 @@
 
 #define generations 100		// number of generations
 
-#define threadsPerBlock 8		// number of threads per block
+#define threadsPerBlock 64		// number of threads per block
 
 #define pathSize 48				// dataset size in number of coordinates
-#define popSize 640000				// population size
+#define popSize 524288				// population size
 #define subPopSize 32				// popSize must be a multiple of this and this should be a multiple of the warp size (32)
 #define selectionThreshold 0.7		// the threshold (%) for the selection of the best chromosomes in the sub-populations
 #define migrationAttemptDelay 10	// the number of generations before a migration attempt is made
@@ -527,7 +527,7 @@ int main(){
 	cudaFree(gpu_population_distances);
 
 	clock_t end = clock();
-	fprintf(stderr,"Execution completed in %.2f ms\n", ((double) (end - start)) * 1000.0 / CLOCKS_PER_SEC);
+	printf("\nExecution completed in %.2f ms\n", ((double) (end - start)) * 1000.0 / CLOCKS_PER_SEC);
 
 	// exit
 	return 0;

@@ -1,0 +1,23 @@
+Island_GA_openmp_128
+total generations: 500 
+ total intergeneration_time 0 
+ avg intergen_time 0 
+ best distance 157530.246250
+avg_total_time 0
+Island_GA_openmp_1024
+total generations: 300 
+ total intergeneration_time  
+ avg intergen_time  
+ best distance 48103.616647
+Island_GA_openmp_8192
+total generations: 500 
+ total intergeneration_time 711 
+ avg intergen_time 1.42 
+ best distance 45554.812407
+avg_total_time 206.80
+Island_GA_openmp_65536
+total generations: 500 
+ total intergeneration_time 7560 
+ avg intergen_time 15.12 
+ best distance 47484.066548
+avg_total_time 1576.00

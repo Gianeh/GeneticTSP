@@ -1,5 +1,5 @@
 #!/bin/bash
-files=("./src/Island_GA_single_core copy.c" "./src/Island_GA_multi_core copy.cpp" "./src/Island_GA_multi_core_no_pool copy.cpp" "./src/Island_GA_opemp copy.cpp" "./src/Island_GA_cuda copy.cu")
+files=( "./src/Island_GA_openmp.cpp" "./src/Island_GA_cuda.cu")
 pop_sizes=(128 1024 8192 65536 524288)
 generations=100
 cuda_tpbs=(32 64)
@@ -38,7 +38,12 @@ for file in "${files[@]}"; do
         fi
         if echo "$file" | grep ".cpp"; then
             exec_name=./src/$(echo "$file" | cut -d"/" -f3 | cut -d"." -f1)_${popSize}
-            g++  -o3 -o "$exec_name" "$file"
+            if echo "$file" | grep openmp; then
+                g++ -fopenmp -O3 -o "$exec_name" "$file"
+            else
+                g++  -O3 -o "$exec_name" "$file"
+            fi
+
             if [[ $? -eq 0 ]]; then
                 echo "executed the compilation of file $file"
                 executables+=("$exec_name")
@@ -73,11 +78,13 @@ for exec in "${executables[@]}";do
     every_total=true
     best_distance=9999999
     for((i=1;i<6;i++)); do
+    set -x
         #get only the filename of the exec
         new_exec=$(echo "$exec" | cut -d"/" -f3)
         #execute the code redirecting the stderr in the stdout to get every line
         echo "executing $new_exec for the $i time"
         result=$("./$new_exec" 2>&1)
+    set +x
         #find the total run generations by counting the lines containing "Generation XX completed in"
         generation=$(echo "$result" | grep -ic "Generation .* completed in")
         #find the generation time by summing all the the 5 th elements (numbers) in the line "Generation XX completed in"

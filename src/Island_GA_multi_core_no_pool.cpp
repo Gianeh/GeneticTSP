@@ -4,13 +4,15 @@
 #include <math.h>
 #include <thread>
 #include <chrono>
+#include <random>
+#include <iostream>
 
 #define generations 100		// number of generations
 
-#define threads 16			// number of threads on the processor
+#define threads 24			// number of threads on the processor
 
 #define pathSize 48				// dataset size in number of coordinates
-#define popSize 64000				// population size
+#define popSize 524288				// population size
 #define subPopSize 32				// popSize must be a multiple of this and this should be a multiple of the warp size (32)
 #define selectionThreshold 0.5		// the threshold (%) for the selection of the best chromosomes in the sub-populations
 #define migrationAttemptDelay 10	// the number of generations before a migration attempt is made
@@ -27,15 +29,21 @@
 #define delta 0.3	// base replication disadvantage
 // The probability that a mutation happens on a certain island is in the range [gamma/(popSize/subPopSize) + delta , gamma + delta] - a minimum of delta is granted for each island
 
-void random_shuffle(int *population, int sub_pop_num){
+
+int intRand(int min, std::mt19937 *generator) {
+	std::uniform_int_distribution<int> distribution(min, RAND_MAX);
+	return distribution(*generator);
+}
+
+void random_shuffle(int *population, int sub_pop_num, std::mt19937 *generator){
     for (int i = 0; i < sub_pop_num * subPopSize; i++){
 		// Avoid last thread to overflow the islands (sub-populations)
 		if (i >= popSize) break;
         // shuffle the ith chromosome
         int gene;
         for (int j = 0; j < pathSize; j++){
-            int idx1 = (int)((rand()/(RAND_MAX+1.0)) * pathSize);
-            int idx2 = (int)((rand()/(RAND_MAX+1.0)) * pathSize);
+            int idx1 = (int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize);
+            int idx2 = (int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize);
             gene = population[i*pathSize + idx1];
             population[i*pathSize + idx1] = population[i*pathSize + idx2];
             population[i*pathSize + idx2] = gene;
@@ -81,9 +89,9 @@ void fit_sort_subpop(int *sub_population, double *sub_population_fitness){
 	}
 }
 
-void distance_crossover(int *parent1, int *parent2, int *offspring, double *distance_matrix){
+void distance_crossover(int *parent1, int *parent2, int *offspring, double *distance_matrix, std::mt19937 *generator){
     // select a random point in parent 1
-	int first = (int)((rand()/(RAND_MAX+1.0)) * pathSize);
+	int first = (int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize);
 	// use it as first part of the offspring
 	offspring[0] = parent1[first];
 	// starting from the first point in both parents, compare the distance with the previous point in the offspring and choose the one with the smallest distance if it is not already in the offspring
@@ -109,13 +117,13 @@ void distance_crossover(int *parent1, int *parent2, int *offspring, double *dist
 		}
 		if (in_offspring1 && in_offspring2){
 			// choose a random one not in the offspring
-			int next = parent1[(int)((rand()/(RAND_MAX+1.0)) * pathSize)];
+			int next = parent1[(int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize)];
 			int in_offspring = 1;
 			while (in_offspring){
 				in_offspring = 0;
 				for (int j = 0; j < offspring_size; j++){
 					if (offspring[j] == next){
-						next = parent1[(int)((rand()/(RAND_MAX+1.0)) * pathSize)];
+						next = parent1[(int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize)];
 						in_offspring = 1;
 						break;
 					}
@@ -147,7 +155,7 @@ void distance_crossover(int *parent1, int *parent2, int *offspring, double *dist
 	}
 }
 
-void crossover(int *sub_population, double *distance_matrix, int island_index){
+void crossover(int *sub_population, double *distance_matrix, int island_index, std::mt19937 *generator){
     // for this subpopulation define the crossover rate
 	double crossover_rate = (alpha * (island_index+1))/(popSize/subPopSize) + beta;
 
@@ -177,9 +185,9 @@ void crossover(int *sub_population, double *distance_matrix, int island_index){
 		}
 		i = i % remaining_top_percent;	// wrap around the remaining top percent
 
-        if (rand()/(RAND_MAX + 1.0) < crossover_rate){
+        if (intRand(0,generator)/(RAND_MAX+1.0) < crossover_rate){
 			// crossover the two chromosomes
-			distance_crossover(sub_population+i*pathSize, sub_population+(i+1)*pathSize, sub_population+j*pathSize, distance_matrix);
+			distance_crossover(sub_population+i*pathSize, sub_population+(i+1)*pathSize, sub_population+j*pathSize, distance_matrix, generator);
 			new_borns += 1;
 			j -= 1;
 		}
@@ -188,7 +196,7 @@ void crossover(int *sub_population, double *distance_matrix, int island_index){
     
 }
 
-void genetic_step(int *population, double *population_fitness, double *distance_matrix, int sub_pop_num){
+void genetic_step(int *population, double *population_fitness, double *distance_matrix, int sub_pop_num, std::mt19937 *generator){
     for (int i = 0; i < sub_pop_num; i++){
         int fitness_index = i * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
 	    int sub_pop_index = i * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
@@ -198,11 +206,11 @@ void genetic_step(int *population, double *population_fitness, double *distance_
         fit_sort_subpop(population+sub_pop_index, population_fitness+fitness_index);
         // Selection is implicit with the sorting
 	    // Crossover
-        crossover(population+sub_pop_index, distance_matrix, i);
+        crossover(population+sub_pop_index, distance_matrix, i, generator);
     }
 }
 
-void mutation(int *population, int sub_pop_num){
+void mutation(int *population, int sub_pop_num, std::mt19937 *generator){
 	for (int i = 0; i < sub_pop_num; i++){
 		int sub_pop_index = i * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
 		// Avoid last thread to overflow the islands (sub-populations)
@@ -210,9 +218,9 @@ void mutation(int *population, int sub_pop_num){
 		int mutation_rate = (gamma * (i+1))/(popSize/subPopSize) + delta;
 		// for each chromosome in the subpopulation except the first one, apply mutation with the mutation rate
 		for (int j = 1; j < subPopSize; j++){
-			if (rand()/(RAND_MAX + 1.0) < mutation_rate){
+			if (intRand(0,generator)/(RAND_MAX+1.0) < mutation_rate){
 				// select two random points in the chromosome and swap them
-				int idx1 = (int)((rand()/(RAND_MAX+1.0)) * pathSize);
+				int idx1 = (int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize);
 				int idx2 = (idx1+1) % pathSize;
 				int temp = population[sub_pop_index+j*pathSize+idx1];
 				population[sub_pop_index+j*pathSize+idx1] = population[sub_pop_index+j*pathSize+idx2];
@@ -317,6 +325,15 @@ int main(){
 	// Random shuffle the population for the first time
 	//---------------------------------------------------------------
     srand(time(NULL));	// seed the random number generator
+	int thread_safe_seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+	// vector of random generators
+	std::mt19937 generators[threads];
+	// seed all the generators
+	for (int i = 0; i < threads; i++){
+		generators[i].seed(thread_safe_seed + i);
+	}
+
 
 	std::thread t[threads];
 	int sub_pop_num = std::ceil((popSize/subPopSize)/threads);	// number of subpopulations/islands per thread
@@ -331,8 +348,9 @@ int main(){
 		int *pop_start = population + i * sub_pop_num * subPopSize * pathSize;
 		printf("Pop_start: %d\n", i * sub_pop_num * subPopSize);
 		double *pop_fit_start = population_fitness + i * subPopSize;
-		t[i] = std::thread([pop_start, pop_fit_start, distance_matrix, population_distances, sub_pop_num](){
-			random_shuffle(pop_start, sub_pop_num);
+		std::mt19937 *generator = &generators[i];
+		t[i] = std::thread([pop_start, pop_fit_start, distance_matrix, population_distances, sub_pop_num, generator](){
+			random_shuffle(pop_start, sub_pop_num, generator);
 			calculate_scores(pop_start, distance_matrix, pop_fit_start, population_distances, sub_pop_num);
 		});
 	}
@@ -355,9 +373,10 @@ int main(){
 		for (int i = 0; i < threads; i++){
 			int *pop_start = population + i * sub_pop_num * subPopSize * pathSize;
 			double *pop_fit_start = population_fitness + i * sub_pop_num * subPopSize;
-			t[i] = std::thread([pop_start, pop_fit_start, sub_pop_num,  distance_matrix](){
-				genetic_step(pop_start, pop_fit_start, distance_matrix, sub_pop_num);
-				mutation(pop_start, sub_pop_num);
+			std::mt19937 *generator = &generators[i];
+			t[i] = std::thread([pop_start, pop_fit_start, sub_pop_num,  distance_matrix, generator](){
+				genetic_step(pop_start, pop_fit_start, distance_matrix, sub_pop_num, generator);
+				mutation(pop_start, sub_pop_num, generator);
 			});
 		}
 		// join the threads
@@ -450,7 +469,7 @@ int main(){
 	free(best_chromosome);
 
 	auto end = std::chrono::high_resolution_clock::now();
-	fprintf(stderr,"Execution completed in %.2ld ms\n", std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
+	printf("\nExecution completed in %.2ld ms\n", std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
 
 	// exit
 	return 0;

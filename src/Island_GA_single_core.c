@@ -3,10 +3,10 @@
 #include <time.h>
 #include <math.h>
 
-#define generations 500		// number of generations
+#define generations 100		// number of generations
 
 #define pathSize 48				// dataset size in number of coordinates
-#define popSize 640000				// population size
+#define popSize 524288				// population size
 #define subPopSize 32				// popSize must be a multiple of this and this should be a multiple of the warp size (32)
 #define selectionThreshold 0.5		// the threshold (%) for the selection of the best chromosomes in the sub-populations
 #define migrationAttemptDelay 10	// the number of generations before a migration attempt is made
