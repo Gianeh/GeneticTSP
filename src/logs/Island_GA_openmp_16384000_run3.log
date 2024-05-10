@@ -1,0 +1,32 @@
+Data loaded in 950 ms
+Scores calculated
+Starting the GA...
+Generation 1 completed in 7452 ms
+Generation 2 completed in 6804 ms
+Generation 3 completed in 6246 ms
+Generation 4 completed in 6148 ms
+Generation 5 completed in 6021 ms
+Generation 6 completed in 5867 ms
+Generation 7 completed in 5773 ms
+Generation 8 completed in 5754 ms
+Generation 9 completed in 5666 ms
+Generation 10 completed in 5694 ms
+Generation 11 completed in 5623 ms
+Generation 12 completed in 5617 ms
+Generation 13 completed in 5590 ms
+Generation 14 completed in 5569 ms
+Generation 15 completed in 5566 ms
+Generation 16 completed in 5546 ms
+Generation 17 completed in 5536 ms
+Generation 18 completed in 5546 ms
+Generation 19 completed in 5511 ms
+Generation 20 completed in 5501 ms
+Generation 21 completed in 5515 ms
+Generation 22 completed in 5490 ms
+Generation 23 completed in 5502 ms
+Generation 24 completed in 5450 ms
+Generation 25 completed in 5484 ms
+Best chromosome: 24 12 10 11 26 36 27 43 6 29 18 16 42 5 35 14 37 30 39 21 0 45 32 17 8 7 19 20 46 22 13 2 15 40 33 4 28 47 38 31 23 34 44 3 25 9 41 1 
+Best distance: 50912.239913
+
+Execution completed in 147383 ms

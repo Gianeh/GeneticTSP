@@ -1,0 +1,61 @@
+Data loaded in 00 ms
+Scores calculated
+Starting the GA...
+Generation 1 completed in 02 ms
+Generation 2 completed in 02 ms
+Generation 3 completed in 02 ms
+Generation 4 completed in 02 ms
+Generation 5 completed in 02 ms
+Generation 6 completed in 02 ms
+Generation 7 completed in 02 ms
+Generation 8 completed in 02 ms
+Generation 9 completed in 02 ms
+Generation 10 completed in 02 ms
+Generation 11 completed in 02 ms
+Generation 12 completed in 02 ms
+Generation 13 completed in 02 ms
+Generation 14 completed in 02 ms
+Generation 15 completed in 02 ms
+Generation 16 completed in 02 ms
+Generation 17 completed in 02 ms
+Generation 18 completed in 02 ms
+Generation 19 completed in 02 ms
+Migrating from Island 241 to 0
+Finished migration
+Generation 20 completed in 02 ms
+Generation 21 completed in 03 ms
+Generation 22 completed in 03 ms
+Generation 23 completed in 02 ms
+Generation 24 completed in 02 ms
+Generation 25 completed in 02 ms
+Generation 26 completed in 02 ms
+Generation 27 completed in 02 ms
+Generation 28 completed in 02 ms
+Generation 29 completed in 02 ms
+Migrating from Island 241 to 0
+Finished migration
+Generation 30 completed in 02 ms
+Generation 31 completed in 03 ms
+Generation 32 completed in 03 ms
+Generation 33 completed in 03 ms
+Generation 34 completed in 02 ms
+Generation 35 completed in 03 ms
+Generation 36 completed in 02 ms
+Generation 37 completed in 02 ms
+Generation 38 completed in 02 ms
+Generation 39 completed in 02 ms
+Generation 40 completed in 02 ms
+Generation 41 completed in 02 ms
+Generation 42 completed in 02 ms
+Generation 43 completed in 02 ms
+Generation 44 completed in 02 ms
+Generation 45 completed in 02 ms
+Generation 46 completed in 02 ms
+Generation 47 completed in 02 ms
+Generation 48 completed in 02 ms
+Generation 49 completed in 02 ms
+Generation 50 completed in 02 ms
+Best chromosome: 30 18 35 17 29 27 32 14 19 20 12 13 2 33 11 46 45 43 6 5 42 16 26 36 37 0 7 10 40 8 21 22 24 38 31 41 25 3 9 34 44 23 4 47 1 28 15 39 
+Best distance: 56795.822513
+
+Execution completed in 143 ms

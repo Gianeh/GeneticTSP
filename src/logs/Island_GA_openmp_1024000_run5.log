@@ -1,0 +1,63 @@
+Data loaded in 62 ms
+Scores calculated
+Starting the GA...
+Generation 1 completed in 479 ms
+Generation 2 completed in 435 ms
+Generation 3 completed in 402 ms
+Generation 4 completed in 378 ms
+Generation 5 completed in 375 ms
+Generation 6 completed in 356 ms
+Generation 7 completed in 362 ms
+Generation 8 completed in 349 ms
+Generation 9 completed in 345 ms
+Migrating from Island 31985 to 0
+Finished migration
+Generation 10 completed in 354 ms
+Generation 11 completed in 392 ms
+Generation 12 completed in 372 ms
+Generation 13 completed in 356 ms
+Generation 14 completed in 354 ms
+Generation 15 completed in 350 ms
+Generation 16 completed in 337 ms
+Generation 17 completed in 338 ms
+Generation 18 completed in 333 ms
+Generation 19 completed in 335 ms
+Migrating from Island 31985 to 0
+Finished migration
+Generation 20 completed in 338 ms
+Generation 21 completed in 395 ms
+Generation 22 completed in 368 ms
+Generation 23 completed in 352 ms
+Generation 24 completed in 338 ms
+Generation 25 completed in 337 ms
+Generation 26 completed in 331 ms
+Generation 27 completed in 331 ms
+Generation 28 completed in 331 ms
+Generation 29 completed in 332 ms
+Generation 30 completed in 330 ms
+Generation 31 completed in 328 ms
+Generation 32 completed in 329 ms
+Generation 33 completed in 337 ms
+Generation 34 completed in 326 ms
+Generation 35 completed in 331 ms
+Generation 36 completed in 325 ms
+Generation 37 completed in 328 ms
+Generation 38 completed in 332 ms
+Generation 39 completed in 328 ms
+Generation 40 completed in 329 ms
+Generation 41 completed in 335 ms
+Generation 42 completed in 323 ms
+Generation 43 completed in 325 ms
+Generation 44 completed in 330 ms
+Generation 45 completed in 327 ms
+Generation 46 completed in 330 ms
+Generation 47 completed in 330 ms
+Generation 48 completed in 330 ms
+Generation 49 completed in 324 ms
+Migrating from Island 31985 to 0
+Finished migration
+Generation 50 completed in 334 ms
+Best chromosome: 44 9 41 47 13 24 33 2 0 15 40 28 22 10 32 45 27 18 42 5 16 26 36 29 35 6 17 43 30 8 21 7 37 19 39 14 11 12 20 46 31 4 38 23 3 25 1 34 
+Best distance: 50582.748398
+
+Execution completed in 17582 ms

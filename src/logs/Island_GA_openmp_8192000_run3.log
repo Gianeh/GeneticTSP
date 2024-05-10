@@ -1,0 +1,36 @@
+Data loaded in 485 ms
+Scores calculated
+Starting the GA...
+Generation 1 completed in 3733 ms
+Generation 2 completed in 3448 ms
+Generation 3 completed in 3168 ms
+Generation 4 completed in 2971 ms
+Generation 5 completed in 2873 ms
+Generation 6 completed in 2818 ms
+Generation 7 completed in 2845 ms
+Generation 8 completed in 2941 ms
+Generation 9 completed in 2860 ms
+Migrating from Island 255985 to 0
+Finished migration
+Generation 10 completed in 2889 ms
+Generation 11 completed in 3248 ms
+Generation 12 completed in 3030 ms
+Generation 13 completed in 2912 ms
+Generation 14 completed in 2845 ms
+Generation 15 completed in 2826 ms
+Generation 16 completed in 2767 ms
+Generation 17 completed in 2772 ms
+Generation 18 completed in 2784 ms
+Generation 19 completed in 2812 ms
+Migrating from Island 255985 to 0
+Finished migration
+Generation 20 completed in 2770 ms
+Generation 21 completed in 3160 ms
+Generation 22 completed in 2952 ms
+Generation 23 completed in 2820 ms
+Generation 24 completed in 2764 ms
+Generation 25 completed in 2731 ms
+Best chromosome: 40 15 7 8 11 19 32 46 22 13 12 24 14 39 2 21 0 37 43 17 30 6 35 5 36 26 16 42 27 18 29 45 47 41 23 44 34 25 3 9 1 28 4 33 31 20 38 10 
+Best distance: 52314.223854
+
+Execution completed in 75218 ms

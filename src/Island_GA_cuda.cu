@@ -8,7 +8,7 @@
 
 #define generations 100		// number of generations
 
-#define threadsPerBlock 64		// number of threads per block
+#define threadsPerBlock 32		// number of threads per block
 
 #define pathSize 48				// dataset size in number of coordinates
 #define popSize 524288				// population size
@@ -447,7 +447,6 @@ int main(){
 		clock_t start_gen = clock();
 
 		// Execute the GA steps
-		printf("Starting Genetic step\n");
 		genetic_step<<<s_grid,s_block>>>(gpu_population, gpu_population_fitness, gpu_distance_matrix); // subpopulation granularity
 			checkCUDAError("genetic_step kernel launch");
 			cudaDeviceSynchronize();				// IS THIS NECESSARY??
@@ -459,13 +458,11 @@ int main(){
 		// calculate the fitness and distances for the new generation
 		if (generation % migrationAttemptDelay == 0 && rand()/RAND_MAX < migrationProbability){
 			// Migration - we suppose when a single island is able to migrate it forces the other islands to migrate as well
-			printf("Starting Migration\n");
 			migration<<<s_grid,s_block>>>(gpu_population); // subpopulation granularity
 				checkCUDAError("migration kernel launch");
 				cudaDeviceSynchronize();				// IS THIS NECESSARY??
 		}
 		// realign the population fitness and distances for the new generation
-		printf("Starting Fitness and Distance Calculation\n");
 		calculate_scores<<<c_grid,c_block>>>(gpu_population, gpu_distance_matrix, gpu_population_fitness, gpu_population_distances);
 			checkCUDAError("calculate_scores kernel launch");
 			cudaDeviceSynchronize();				// IS THIS NECESSARY??

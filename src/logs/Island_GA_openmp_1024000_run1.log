@@ -1,0 +1,67 @@
+Data loaded in 62 ms
+Scores calculated
+Starting the GA...
+Generation 1 completed in 478 ms
+Generation 2 completed in 445 ms
+Generation 3 completed in 406 ms
+Generation 4 completed in 378 ms
+Generation 5 completed in 370 ms
+Generation 6 completed in 360 ms
+Generation 7 completed in 357 ms
+Generation 8 completed in 352 ms
+Generation 9 completed in 347 ms
+Migrating from Island 31985 to 0
+Finished migration
+Generation 10 completed in 349 ms
+Generation 11 completed in 391 ms
+Generation 12 completed in 382 ms
+Generation 13 completed in 352 ms
+Generation 14 completed in 346 ms
+Generation 15 completed in 344 ms
+Generation 16 completed in 337 ms
+Generation 17 completed in 338 ms
+Generation 18 completed in 346 ms
+Generation 19 completed in 333 ms
+Migrating from Island 31985 to 0
+Finished migration
+Generation 20 completed in 336 ms
+Generation 21 completed in 383 ms
+Generation 22 completed in 368 ms
+Generation 23 completed in 345 ms
+Generation 24 completed in 337 ms
+Generation 25 completed in 331 ms
+Generation 26 completed in 331 ms
+Generation 27 completed in 333 ms
+Generation 28 completed in 330 ms
+Generation 29 completed in 340 ms
+Migrating from Island 31985 to 0
+Finished migration
+Generation 30 completed in 335 ms
+Generation 31 completed in 378 ms
+Generation 32 completed in 361 ms
+Generation 33 completed in 346 ms
+Generation 34 completed in 335 ms
+Generation 35 completed in 330 ms
+Generation 36 completed in 335 ms
+Generation 37 completed in 325 ms
+Generation 38 completed in 325 ms
+Generation 39 completed in 335 ms
+Migrating from Island 31985 to 0
+Finished migration
+Generation 40 completed in 336 ms
+Generation 41 completed in 372 ms
+Generation 42 completed in 353 ms
+Generation 43 completed in 348 ms
+Generation 44 completed in 328 ms
+Generation 45 completed in 330 ms
+Generation 46 completed in 332 ms
+Generation 47 completed in 325 ms
+Generation 48 completed in 321 ms
+Generation 49 completed in 323 ms
+Migrating from Island 31985 to 0
+Finished migration
+Generation 50 completed in 324 ms
+Best chromosome: 31 38 20 43 30 14 22 15 21 0 7 37 45 17 5 29 36 18 16 42 26 35 27 10 11 32 19 2 39 8 6 46 12 24 13 33 40 4 47 28 1 41 25 3 34 44 9 23 
+Best distance: 48574.135415
+
+Execution completed in 17760 ms

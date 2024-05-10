@@ -1,0 +1,108 @@
+Data loaded in 52.89 ms
+Generation 1 completed in 41.79 ms
+Generation 2 completed in 35.97 ms
+Generation 3 completed in 35.42 ms
+Generation 4 completed in 33.01 ms
+Generation 5 completed in 32.73 ms
+Generation 6 completed in 30.69 ms
+Generation 7 completed in 33.82 ms
+Generation 8 completed in 30.86 ms
+Generation 9 completed in 30.08 ms
+Generation 10 completed in 30.10 ms
+Generation 11 completed in 35.10 ms
+Generation 12 completed in 31.16 ms
+Generation 13 completed in 31.65 ms
+Generation 14 completed in 29.58 ms
+Generation 15 completed in 27.46 ms
+Generation 16 completed in 28.69 ms
+Generation 17 completed in 29.97 ms
+Generation 18 completed in 28.36 ms
+Generation 19 completed in 28.61 ms
+Generation 20 completed in 28.81 ms
+Generation 21 completed in 33.84 ms
+Generation 22 completed in 32.47 ms
+Generation 23 completed in 30.23 ms
+Generation 24 completed in 29.57 ms
+Generation 25 completed in 27.75 ms
+Generation 26 completed in 28.10 ms
+Generation 27 completed in 29.64 ms
+Generation 28 completed in 28.68 ms
+Generation 29 completed in 28.98 ms
+Generation 30 completed in 29.49 ms
+Generation 31 completed in 32.48 ms
+Generation 32 completed in 30.42 ms
+Generation 33 completed in 30.84 ms
+Generation 34 completed in 28.47 ms
+Generation 35 completed in 28.83 ms
+Generation 36 completed in 28.62 ms
+Generation 37 completed in 28.92 ms
+Generation 38 completed in 29.28 ms
+Generation 39 completed in 27.61 ms
+Generation 40 completed in 27.60 ms
+Generation 41 completed in 32.01 ms
+Generation 42 completed in 32.61 ms
+Generation 43 completed in 30.02 ms
+Generation 44 completed in 27.72 ms
+Generation 45 completed in 27.85 ms
+Generation 46 completed in 28.08 ms
+Generation 47 completed in 27.73 ms
+Generation 48 completed in 27.50 ms
+Generation 49 completed in 30.07 ms
+Generation 50 completed in 28.65 ms
+Using 256 total threads in subpopulation granularity
+Of which 8 blocks containing 32 threads each
+Starting the GA
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Best chromosome: 34 44 9 25 1 31 32 19 14 11 8 21 37 0 2 12 20 46 13 24 22 39 27 7 30 45 5 36 17 29 42 26 6 18 16 35 38 47 41 28 33 15 10 43 40 4 23 3 
+Best distance: 69187.445972
+
+Execution completed in 1580.49 ms

@@ -1,7 +1,7 @@
 #!/bin/bash
-files=( "./src/Island_GA_openmp.cpp" "./src/Island_GA_cuda.cu")
-pop_sizes=(128 1024 8192 65536 524288)
-generations=100
+files=( "./src/Island_GA_multi_core.cpp" "./src/Island_GA_multi_core_no_pool.cpp" "./src/Island_GA_cuda_s_granularity.cu" "./src/Island_GA_openmp.cpp" "./src/Island_GA_single_core.c")
+pop_sizes=(128 1024 8192 65536 524288 1024000)
+generations=50
 cuda_tpbs=(32 64)
 result_file=$(pwd)/results/last_result.txt
 rm "$result_file" #this assures that only the last result file is stored
@@ -33,10 +33,11 @@ for file in "${files[@]}"; do
                 executables+=("$exec_name")
                 else
                     echo "something went wrong in the compilation of file $file"
+                    head -n 15 "$file"
+                    sleep 10
                 fi
             done
-        fi
-        if echo "$file" | grep ".cpp"; then
+        elif echo "$file" | grep ".cpp"; then
             exec_name=./src/$(echo "$file" | cut -d"/" -f3 | cut -d"." -f1)_${popSize}
             if echo "$file" | grep openmp; then
                 g++ -fopenmp -O3 -o "$exec_name" "$file"
@@ -50,8 +51,7 @@ for file in "${files[@]}"; do
             else
                 echo "something went wrong in the compilation of file $file"
             fi
-        fi
-        if echo "$file" | grep ".c" | grep -v pp; then
+        elif echo "$file" | grep ".c" | grep -v pp; then
             exec_name=./src/$(echo "$file" | cut -d"/" -f3 | cut -d"." -f1)_${popSize}
             gcc -o3 -o "$exec_name" "$file" -lm
             if [[ $? -eq 0 ]]; then
@@ -71,20 +71,26 @@ echo "############################"
 
 cd src || exit
 
-for exec in "${executables[@]}";do
+mkdir -p logs
+
+for exec in "${executables[@]}"; do
     total_generations=0
     total_intergeneration_time=0
     sum_total_time=0
     every_total=true
     best_distance=9999999
     for((i=1;i<6;i++)); do
-    set -x
-        #get only the filename of the exec
+        # Get only the filename of the exec
         new_exec=$(echo "$exec" | cut -d"/" -f3)
-        #execute the code redirecting the stderr in the stdout to get every line
-        echo "executing $new_exec for the $i time"
-        result=$("./$new_exec" 2>&1)
-    set +x
+        # Unique log file for each execution
+        log_file="logs/${new_exec}_run${i}.log"
+        # Execute the code redirecting both stdout and stderr to the log file
+        echo "Executing $new_exec for the $i time"
+        "./$new_exec" > "$log_file" 2>&1
+        echo "Execution completed - waiting a brief timeout to avoid memory issues"
+        sleep 2
+        # Now, read from the log file for processing
+        result=$(cat "$log_file")
         #find the total run generations by counting the lines containing "Generation XX completed in"
         generation=$(echo "$result" | grep -ic "Generation .* completed in")
         #find the generation time by summing all the the 5 th elements (numbers) in the line "Generation XX completed in"
@@ -109,6 +115,8 @@ for exec in "${executables[@]}";do
                 best_distance=$best_distance_run
             fi
         fi
+        #sleep 5 seconds to avoid the next execution to start before the previous one has finished removing memory
+        sleep 2
     done
     echo -e "##############################################\n          results\n##############################################"
     #calculate the avg intergen time and print it together with the generations

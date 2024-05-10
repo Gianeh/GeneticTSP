@@ -29,7 +29,7 @@ def plot_points_with_lines(points):
 def main():
     # best_solution.txt path
     path = os.path.dirname(os.path.abspath(__file__))
-    filename = os.path.join(path, '../data/best_solution.txt')
+    filename = os.path.join(path, '../../results/best_solution.txt')
     print(filename)
     
     points = read_points_from_file(filename)

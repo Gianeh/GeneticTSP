@@ -1,0 +1,58 @@
+Data loaded in 486.75 ms
+Generation 1 completed in 273.60 ms
+Generation 2 completed in 225.14 ms
+Generation 3 completed in 211.84 ms
+Generation 4 completed in 200.47 ms
+Generation 5 completed in 198.83 ms
+Generation 6 completed in 198.52 ms
+Generation 7 completed in 197.22 ms
+Generation 8 completed in 198.07 ms
+Generation 9 completed in 197.15 ms
+Generation 10 completed in 202.36 ms
+Generation 11 completed in 229.01 ms
+Generation 12 completed in 216.79 ms
+Generation 13 completed in 203.96 ms
+Generation 14 completed in 196.22 ms
+Generation 15 completed in 195.84 ms
+Generation 16 completed in 194.55 ms
+Generation 17 completed in 194.27 ms
+Generation 18 completed in 195.42 ms
+Generation 19 completed in 195.33 ms
+Generation 20 completed in 199.18 ms
+Generation 21 completed in 226.75 ms
+Generation 22 completed in 214.30 ms
+Generation 23 completed in 201.83 ms
+Generation 24 completed in 195.61 ms
+Generation 25 completed in 193.81 ms
+Using 128000 total threads in subpopulation granularity
+Of which 4000 blocks containing 32 threads each
+Starting the GA
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Starting Mutation_3
+Best chromosome: 39 42 6 43 35 29 27 10 47 13 33 20 31 12 24 4 9 41 1 28 2 22 16 17 32 8 45 14 11 37 30 15 40 21 0 19 46 3 25 44 23 34 38 5 18 36 26 7 
+Best distance: 75499.872307
+
+Execution completed in 6003.87 ms

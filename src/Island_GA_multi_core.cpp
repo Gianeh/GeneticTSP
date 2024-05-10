@@ -14,12 +14,12 @@
 #include <chrono>
 #include <random>
 
-#define generations 100		// number of generations
+#define generations 25		// number of generations
 
 #define threads 16			// number of threads on the processor
 
 #define pathSize 48				// dataset size in number of coordinates
-#define popSize 524288				// population size
+#define popSize 4096000				// population size
 #define subPopSize 32				// popSize must be a multiple of this and this should be a multiple of the warp size (32)
 #define selectionThreshold 0.5		// the threshold (%) for the selection of the best chromosomes in the sub-populations
 #define migrationAttemptDelay 10	// the number of generations before a migration attempt is made
@@ -36,6 +36,7 @@
 #define delta 0.3	// base replication disadvantage
 // The probability that a mutation happens on a certain island is in the range [gamma/(popSize/subPopSize) + delta , gamma + delta] - a minimum of delta is granted for each island
 
+#define RandomnessPatience 1000
 
 class ThreadPool {
 public:
@@ -43,7 +44,7 @@ public:
         for (int i = 0; i < numThreads; ++i) {
             workers.emplace_back([this, i] {
                 // Configura l'affinità del thread per il core i (o per un core specifico secondo la strategia di mapping)
-                set_thread_affinity(i);
+                //set_thread_affinity(i);
 
                 //std::cout << "Thread " << i << " started" << std::endl;
                 while (true) {
@@ -211,6 +212,7 @@ void distance_crossover(int *parent1, int *parent2, int *offspring, double *dist
 			// choose a random one not in the offspring
 			int next = parent1[(int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize)];
 			int in_offspring = 1;
+			int iter = 0;
 			while (in_offspring){
 				in_offspring = 0;
 				for (int j = 0; j < offspring_size; j++){
@@ -218,6 +220,24 @@ void distance_crossover(int *parent1, int *parent2, int *offspring, double *dist
 						next = parent1[(int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize)];
 						in_offspring = 1;
 						break;
+					}
+				}
+
+				iter++;
+				if(iter > RandomnessPatience){
+					// randomly picking a gene is taking too long, iterate over parent 1 and chose one that is not in the offspring
+					for (int g = 0; g < pathSize; g++){	// parent1 is already passed with offset i+1 considering the first city is already in the offspring
+						next = parent1[g];
+						in_offspring = false;
+						for (int j = 0; j < offspring_size; j++){
+							if (offspring[j] == next){
+								in_offspring = true;
+								break;
+							}
+						}
+						if (!in_offspring){
+							break;
+						}
 					}
 				}
 			}
