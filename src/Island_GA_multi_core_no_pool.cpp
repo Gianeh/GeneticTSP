@@ -7,12 +7,12 @@
 #include <random>
 #include <iostream>
 
-#define generations 25		// number of generations
+#define generations 50		// number of generations
 
 #define threads 16			// number of threads on the processor
 
 #define pathSize 48				// dataset size in number of coordinates
-#define popSize 4096000				// population size
+#define popSize 1024				// population size
 #define subPopSize 32				// popSize must be a multiple of this and this should be a multiple of the warp size (32)
 #define selectionThreshold 0.5		// the threshold (%) for the selection of the best chromosomes in the sub-populations
 #define migrationAttemptDelay 10	// the number of generations before a migration attempt is made
@@ -31,12 +31,13 @@
 
 #define RandomnessPatience 1000	// the number of iterations before a deterministic gene is selected in the crossover
 
-
+// Generate a threadsafe random integer in the range [min, RAND_MAX]
 int intRand(int min, std::mt19937 *generator) {
 	std::uniform_int_distribution<int> distribution(min, RAND_MAX);
 	return distribution(*generator);
 }
 
+// Shuffle sub_pop_num subpopulations in the population
 void random_shuffle(int *population, int sub_pop_num, std::mt19937 *generator){
     for (int i = 0; i < sub_pop_num * subPopSize; i++){
 		// Avoid last thread to overflow the islands (sub-populations)
@@ -53,6 +54,7 @@ void random_shuffle(int *population, int sub_pop_num, std::mt19937 *generator){
     }
 }
 
+// Calculate the total distance of a chromosome
 double calculate_distance(int *chromosome, double *distance_matrix){
     double distance = 0.0;
 	for (int i = 0; i < pathSize-1; i++){
@@ -62,6 +64,7 @@ double calculate_distance(int *chromosome, double *distance_matrix){
 	return distance;
 }
 
+// Rate sub_pop_num subpopulations in the population
 void calculate_scores(int *population, double *distance_matrix, double *population_fitness, double *population_distances, int sub_pop_num){
     for (int i = 0; i < sub_pop_num * subPopSize; i++){
 		// Avoid last thread to overflow the islands (sub-populations)
@@ -71,6 +74,7 @@ void calculate_scores(int *population, double *distance_matrix, double *populati
     }
 }
 
+// Sort the subpopulation according to the fitness
 void fit_sort_subpop(int *sub_population, double *sub_population_fitness){
     for (int i = 0; i < subPopSize; i++){
 		for (int j = 0; j < subPopSize-1; j++){
@@ -91,6 +95,7 @@ void fit_sort_subpop(int *sub_population, double *sub_population_fitness){
 	}
 }
 
+// Crossover two chromosomes
 void distance_crossover(int *parent1, int *parent2, int *offspring, double *distance_matrix, std::mt19937 *generator){
     // select a random point in parent 1
 	int first = (int)((intRand(0,generator)/(RAND_MAX+1.0)) * pathSize);
@@ -175,6 +180,7 @@ void distance_crossover(int *parent1, int *parent2, int *offspring, double *dist
 	}
 }
 
+// Crossover top chromosomes in the subpopulation - novel method "Fittest Roulette"
 void crossover(int *sub_population, double *distance_matrix, int island_index, std::mt19937 *generator){
     // for this subpopulation define the crossover rate
 	double crossover_rate = (alpha * (island_index+1))/(popSize/subPopSize) + beta;
@@ -216,26 +222,27 @@ void crossover(int *sub_population, double *distance_matrix, int island_index, s
     
 }
 
+// Selection and Crossover step of the GA on sub_pop_num subpopulations
 void genetic_step(int *population, double *population_fitness, double *distance_matrix, int sub_pop_num, std::mt19937 *generator){
     for (int i = 0; i < sub_pop_num; i++){
         int fitness_index = i * subPopSize;	// index of the first fitness of each subpopulation - is the same for the distances
 	    int sub_pop_index = i * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
 		// Avoid last thread to overflwow the islands (sub-populations)
 		if (fitness_index >= popSize) break;
-        // sort subpopulations according to fittness
+        // Selection - Sort subpopulations according to fittness
         fit_sort_subpop(population+sub_pop_index, population_fitness+fitness_index);
-        // Selection is implicit with the sorting
 	    // Crossover
         crossover(population+sub_pop_index, distance_matrix, i, generator);
     }
 }
 
+// Mutation step of the GA on sub_pop_num subpopulations
 void mutation(int *population, int sub_pop_num, std::mt19937 *generator){
 	for (int i = 0; i < sub_pop_num; i++){
 		int sub_pop_index = i * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
 		// Avoid last thread to overflow the islands (sub-populations)
 		if (sub_pop_index >= popSize * pathSize) break;
-		int mutation_rate = (gamma * (i+1))/(popSize/subPopSize) + delta;
+		double mutation_rate = (gamma * (i+1))/(popSize/subPopSize) + delta;
 		// for each chromosome in the subpopulation except the first one, apply mutation with the mutation rate
 		for (int j = 1; j < subPopSize; j++){
 			if (intRand(0,generator)/(RAND_MAX+1.0) < mutation_rate){
@@ -250,25 +257,22 @@ void mutation(int *population, int sub_pop_num, std::mt19937 *generator){
 	}
 }
 
+// Migration step of the GA on sub_pop_num subpopulations
 void migration(int *population, int sub_pop_num, int thread){
 	for (int i = 0; i < sub_pop_num; i++){
 		int sub_pop_index = i * subPopSize * pathSize;	// index of the first chromosome of each subpopulation
 		// Avoid last thread to overflow the islands (sub-populations)
 		if (sub_pop_index * (thread+1) > (popSize - subPopSize) * pathSize){
-			printf("sub_pop_index: %d is greater than popSize * pathSize: %d\n", sub_pop_index, popSize * pathSize);
 			break;
 		}
 		// select the next subpopulation to migrate to, in case sub_pop_index is the last subpopulation, migrate to the first subpopulation in a ring
 		int next_sub_pop_index = (sub_pop_index + subPopSize * pathSize);
 		if (next_sub_pop_index * (thread+1) % (popSize * pathSize) == 0){
 			next_sub_pop_index = 0;
-			printf("Migrating from Island %d to %d\n", ((sub_pop_index * (thread+1))/pathSize)/subPopSize + 1, (next_sub_pop_index/pathSize)/subPopSize);
 		}
-		//printf("Migrating from Island %d to %d\n", (sub_pop_index/pathSize)/subPopSize, (next_sub_pop_index/pathSize)/subPopSize);
 		// swap the FRIST migrationNumber chromosomes from subpopulation sub_pop_index with the LAST migrationNumber chromosomes from subpopulation next_sub_pop_index
 		for (int j = 0; j < migrationNumber; j++){
 			// swap the chromosome i from subpopulation sub_pop_index with the chromosome subPopSize-migrationNumber+i from subpopulation next_sub_pop_index
-			//printf("migrating chromosome %d to %d\n", sub_pop_index + j*pathSize, next_sub_pop_index + j*pathSize);
 			for (int k = 0; k < pathSize; k++){
 				int gene = population[sub_pop_index+j*pathSize+k];
 				population[sub_pop_index+j*pathSize+k] = population[next_sub_pop_index+(subPopSize-migrationNumber+j)*pathSize+k];
@@ -278,6 +282,7 @@ void migration(int *population, int sub_pop_num, int thread){
 	}
 }
 
+// Sort the population according to the fitness
 void fit_sort(int *population, double *population_fitness, int sub_pop_num){
 	for (int i = 0; i <sub_pop_num; i++){
 		// Avoid last thread to overflow the islands (sub-populations)
@@ -287,7 +292,6 @@ void fit_sort(int *population, double *population_fitness, int sub_pop_num){
 }
 
 void load_data(int *coordinates, const char *filename){
-	// read filename
 	FILE *file = fopen(filename, "r");
 	if (file == NULL){
 		printf("Error opening file %s\n", filename);
@@ -314,15 +318,11 @@ void save_best_solution(int *best_chromosome, int *coordinates){
 int main(){
 	auto start = std::chrono::high_resolution_clock::now();
 
-    //-------------------------------------------------
 	// Load the coordinates of the cities from file
-	//-------------------------------------------------
     int *path_coordinates = (int*)malloc(pathSize * 2 * sizeof(int));	//[pathSize][2];
     load_data(path_coordinates, "../data/48_cities.txt");
 
-    //-----------------------------------------
 	// Allocate and fill the distance matrix
-	//-----------------------------------------
 	double *distance_matrix = (double*)malloc(pathSize*pathSize*sizeof(double));	//[pathSize][pathSize];
 	for(int i = 0; i < pathSize; i++){
 		for(int j = 0; j < pathSize; j++){
@@ -330,21 +330,23 @@ int main(){
 		}
 	}
 
-
+	// Allocate and fill the population
     int *population = (int*)malloc(popSize * pathSize * sizeof(int));	//[popSize][pathSize]; - This represents the order of the cities for each chromosome in the population
 	for (int i = 0; i < pathSize * popSize; i++){
 		population[i] = i % pathSize;
 		
 	}
 
+	// Allocate fitness and distances for each individual and calculate them
+	double *population_fitness = (double*)malloc(popSize*sizeof(double));	//[popSize];
+	double *population_distances = (double*)malloc(popSize*sizeof(double));	//[popSize];
+
     auto load_checkpoint = std::chrono::high_resolution_clock::now();
 	printf("Data loaded in %.2ld ms\n", std::chrono::duration_cast<std::chrono::milliseconds>(load_checkpoint - start).count());
 
-
-	//---------------------------------------------------------------
-	// Random shuffle the population for the first time
-	//---------------------------------------------------------------
+	
     srand(time(NULL));	// seed the random number generator
+	// seed the random number generator for each thread
 	int thread_safe_seed = std::chrono::system_clock::now().time_since_epoch().count();
 
 	// vector of random generators
@@ -354,19 +356,13 @@ int main(){
 		generators[i].seed(thread_safe_seed + i);
 	}
 
-
+	// create a vector of threads
 	std::thread t[threads];
 	int sub_pop_num = std::ceil((popSize/subPopSize)/threads);	// number of subpopulations/islands per thread
 
-	//-----------------------------------------------------------------------
-	// Allocate fitness and distances for each individual and calculate them
-	//-----------------------------------------------------------------------
-	double *population_fitness = (double*)malloc(popSize*sizeof(double));	//[popSize];
-	double *population_distances = (double*)malloc(popSize*sizeof(double));	//[popSize];
-
+	// Random shuffle and Calculate scores for each subpopulation for the first generation
 	for (int i = 0; i < threads; i++){
 		int *pop_start = population + i * sub_pop_num * subPopSize * pathSize;
-		printf("Pop_start: %d\n", i * sub_pop_num * subPopSize);
 		double *pop_fit_start = population_fitness + i * subPopSize;
 		std::mt19937 *generator = &generators[i];
 		t[i] = std::thread([pop_start, pop_fit_start, distance_matrix, population_distances, sub_pop_num, generator](){
@@ -374,7 +370,7 @@ int main(){
 			calculate_scores(pop_start, distance_matrix, pop_fit_start, population_distances, sub_pop_num);
 		});
 	}
-	// join the threads
+	// join the threads - wait for all the threads to finish
 	for (int i = 0; i < threads; i++){
 		t[i].join();
 	}
@@ -388,8 +384,8 @@ int main(){
 	printf("Starting the GA...\n");
     while (generation <= generations){
 		auto start_gen = std::chrono::high_resolution_clock::now();
-		// create a vector of threads
-		// assign the threads to the genetic_step function and mutate function
+		
+		// Execute Selection, Crossover and Mutation
 		for (int i = 0; i < threads; i++){
 			int *pop_start = population + i * sub_pop_num * subPopSize * pathSize;
 			double *pop_fit_start = population_fitness + i * sub_pop_num * subPopSize;
@@ -399,11 +395,12 @@ int main(){
 				mutation(pop_start, sub_pop_num, generator);
 			});
 		}
-		// join the threads
+		// join the threads - wait for all the threads to finish
 		for (int i = 0; i < threads; i++){
 			t[i].join();
 		}
 
+		// If it's time, execute migration
 		if (generation % migrationAttemptDelay == 0 && rand()/(RAND_MAX + 1.0) < migrationProbability){
 			for (int i = 0; i < threads; i++){
 				int *pop_start = population + i * sub_pop_num * subPopSize * pathSize;
@@ -411,14 +408,14 @@ int main(){
 					migration(pop_start, sub_pop_num, i);
 				});
 			}
-			// join the threads
+			// join the threads - wait for all the threads to finish
 			for (int i = 0; i < threads; i++){
 				t[i].join();
 			}
 			printf("Finished migration\n");
 		}
 
-		// calculate the scores for the new generation
+		// Calculate the scores for the new generation
 		for (int i = 0; i < threads; i++){
 			int *pop_start = population + i * sub_pop_num * subPopSize * pathSize;
 			double *pop_fit_start = population_fitness + i * sub_pop_num * subPopSize;
@@ -426,16 +423,18 @@ int main(){
 				calculate_scores(pop_start, distance_matrix, pop_fit_start, population_distances, sub_pop_num);
 			});
 		}
-		// join the threads
+		// join the threads - wait for all the threads to finish
 		for (int i = 0; i < threads; i++){
 			t[i].join();
 		}
-		generation++;
 
 		auto end_gen = std::chrono::high_resolution_clock::now();
-		printf("Generation %d completed in %.2ld ms\n", generation-1, std::chrono::duration_cast<std::chrono::milliseconds>(end_gen - start_gen).count());
+		printf("Generation %d completed in %.2ld ms\n", generation, std::chrono::duration_cast<std::chrono::milliseconds>(end_gen - start_gen).count());
+		generation++;
 
     }
+
+	// Sort the population one last time
 	for (int i = 0; i < threads; i++){
 		int *pop_start = population + i * sub_pop_num * subPopSize * pathSize;
 		double *pop_fit_start = population_fitness + i * sub_pop_num * subPopSize;
@@ -443,12 +442,13 @@ int main(){
 			fit_sort(pop_start, pop_fit_start, sub_pop_num);
 		});
 	}
-	// join the threads
+
+	// join the threads - wait for all the threads to finish
 	for (int i = 0; i < threads; i++){
 		t[i].join();
 	}
 	
-	// considering each island (subpopulation) are sorted, select the best amog all the islands
+	// Considering each island (subpopulation) are sorted, select the best amog all the islands
 	double best_fitness = 0.0;
 	int best_index = 0;
 	for (int i = 0; i < popSize; i += subPopSize){
@@ -457,16 +457,15 @@ int main(){
 			best_index = i;
 		}
 	}
-	// extract the best chromosome from the population
+	// Extract the best chromosome from the population
 	int *best_chromosome = (int*)malloc(pathSize*sizeof(int));
 	for (int i = 0; i < pathSize; i++){
 		best_chromosome[i] = population[best_index*pathSize+i];
 	}
 
-	// also use the best_chromosome[i] to index the cities from the coordinates and append to a file
 	save_best_solution(best_chromosome, path_coordinates);
 
-	// calculate the distance of the best chromosome
+	// Calculate the total distance of the best chromosome
 	double best_distance = 0.0;
 	for (int i = 0; i < pathSize-1; i++){
 		best_distance += distance_matrix[best_chromosome[i]*pathSize + best_chromosome[i+1]];
@@ -480,7 +479,7 @@ int main(){
 	}
 	printf("\nBest distance: %f\n", best_distance);
 
-	// free the memory
+	// Free the memory
 	free(path_coordinates);
 	free(distance_matrix);
 	free(population);

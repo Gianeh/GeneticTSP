@@ -1,5 +1,5 @@
 #!/bin/bash
-files=("./src/Island_GA_cuda_s_granularity.cu" "./src/Island_GA_openmp.cpp")
+files=("./src/Island_GA_cuda.cu" "./src/Island_GA_openmp.cpp")
 pop_sizes=(2048000 4096000 8192000 16384000)
 generations=25
 cuda_tpbs=(32 64)
@@ -99,7 +99,7 @@ for exec in "${executables[@]}"; do
         total_generations=$(("$total_generations" + "$generation"))
         #find the total time in result
         total_time=$(echo "$result" | grep -i "Execution completed in" | awk '{print $4}')
-        #if the total time has been foun inside the result then echo it sum it to the total between runs
+        #if the total time has been found inside the result then echo it sum it to the total between runs
         if [[ -n $total_time ]]; then
             sum_total_time=$(echo "$total_time + $sum_total_time" | bc)
         else
@@ -133,3 +133,5 @@ for exec in "${executables[@]}"; do
     
     echo "##############################################"
 done
+find . -maxdepth 1 -type f -executable ! -name "*.sh" -exec rm -f {} \;
+echo "removed all the executables"

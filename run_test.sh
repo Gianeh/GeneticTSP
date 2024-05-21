@@ -1,5 +1,5 @@
 #!/bin/bash
-files=( "./src/Island_GA_multi_core.cpp" "./src/Island_GA_multi_core_no_pool.cpp" "./src/Island_GA_cuda_s_granularity.cu" "./src/Island_GA_openmp.cpp" "./src/Island_GA_single_core.c")
+files=( "./src/Island_GA_multi_core.cpp" "./src/Island_GA_multi_core_no_pool.cpp" "./src/Island_GA_cuda.cu" "./src/Island_GA_openmp.cpp" "./src/Island_GA_single_core.c")
 pop_sizes=(128 1024 8192 65536 524288 1024000)
 generations=50
 cuda_tpbs=(32 64)
@@ -133,3 +133,5 @@ for exec in "${executables[@]}"; do
     
     echo "##############################################"
 done
+find . -maxdepth 1 -type f -executable ! -name "*.sh" -exec rm -f {} \;
+echo "removed all the executables"

@@ -3,286 +3,70 @@ total generations: 250
  total intergeneration_time 0 
  avg intergen_time 0 
  best distance 157530.246250
-avg_total_time 4.20
+avg_total_time 17.20
 Island_GA_multi_core_1024
 total generations: 250 
- total intergeneration_time 2 
- avg intergen_time 0 
- best distance 58529.221774
-avg_total_time 19.00
-Island_GA_multi_core_8192
-total generations: 250 
- total intergeneration_time 670 
- avg intergen_time 2.68 
- best distance 49783.139529
-avg_total_time 156.60
-Island_GA_multi_core_65536
-total generations: 250 
- total intergeneration_time 5612 
- avg intergen_time 22.44 
- best distance 50760.155961
-avg_total_time 1160.40
-Island_GA_multi_core_524288
-total generations: 250 
- total intergeneration_time 44108 
- avg intergen_time 176.43 
- best distance 49058.145204
-avg_total_time 8943.00
-Island_GA_multi_core_1024000
-total generations: 250 
- total intergeneration_time 86219 
- avg intergen_time 344.87 
- best distance 47684.066070
-avg_total_time 17458.20
+ total intergeneration_time 278 
+ avg intergen_time 1.11 
+ best distance 53578.719818
+avg_total_time 87.80
 Island_GA_multi_core_no_pool_128
 total generations: 250 
- total intergeneration_time 0 
- avg intergen_time 0 
+ total intergeneration_time 43 
+ avg intergen_time .17 
  best distance 157530.246250
-avg_total_time 21.20
+avg_total_time 34.20
 Island_GA_multi_core_no_pool_1024
 total generations: 250 
- total intergeneration_time 12 
- avg intergen_time .04 
- best distance 57972.942515
-avg_total_time 39.00
-Island_GA_multi_core_no_pool_8192
-total generations: 250 
- total intergeneration_time 736 
- avg intergen_time 2.94 
- best distance 53134.465684
-avg_total_time 169.20
-Island_GA_multi_core_no_pool_65536
-total generations: 250 
- total intergeneration_time 5692 
- avg intergen_time 22.76 
- best distance 50958.229139
-avg_total_time 1173.80
-Island_GA_multi_core_no_pool_524288
-total generations: 250 
- total intergeneration_time 44498 
- avg intergen_time 177.99 
- best distance 48417.151517
-avg_total_time 9018.00
-Island_GA_multi_core_no_pool_1024000
-total generations: 250 
- total intergeneration_time 86065 
- avg intergen_time 344.26 
- best distance 49166.235519
-avg_total_time 17422.00
+ total intergeneration_time 407 
+ avg intergen_time 1.62 
+ best distance 56032.788339
+avg_total_time 111.20
 cuda_32_128
 total generations: 250 
- total intergeneration_time 2121 
- avg intergen_time 8.48 
- best distance 73399.484468
-avg_total_time 748.32
+ total intergeneration_time 1984 
+ avg intergen_time 7.93 
+ best distance 74600.043635
+avg_total_time 731.84
 cuda_64_128
 total generations: 250 
- total intergeneration_time 2135 
- avg intergen_time 8.54 
- best distance 65526.641439
-avg_total_time 527.98
+ total intergeneration_time 1982 
+ avg intergen_time 7.92 
+ best distance 78610.367447
+avg_total_time 506.18
 cuda_32_1024
 total generations: 250 
- total intergeneration_time 6512 
- avg intergen_time 26.04 
- best distance 64296.504878
-avg_total_time 1407.00
+ total intergeneration_time 7361 
+ avg intergen_time 29.44 
+ best distance 71229.077104
+avg_total_time 1586.75
 cuda_64_1024
 total generations: 250 
- total intergeneration_time 6546 
- avg intergen_time 26.18 
- best distance 75965.808704
-avg_total_time 1418.84
-cuda_32_8192
-total generations: 250 
- total intergeneration_time 7487 
- avg intergen_time 29.94 
- best distance 55522.297344
-avg_total_time 1604.32
-cuda_64_8192
-total generations: 250 
- total intergeneration_time 7453 
- avg intergen_time 29.81 
- best distance 61247.121226
-avg_total_time 1596.18
-cuda_32_65536
-total generations: 250 
- total intergeneration_time 8839 
- avg intergen_time 35.35 
- best distance 65884.438100
-avg_total_time 1884.29
-cuda_64_65536
-total generations: 250 
- total intergeneration_time 8941 
- avg intergen_time 35.76 
- best distance 52581.759631
-avg_total_time 1901.23
-cuda_32_524288
-total generations: 250 
- total intergeneration_time 11485 
- avg intergen_time 45.94 
- best distance 69004.320862
-avg_total_time 2493.45
-cuda_64_524288
-total generations: 250 
- total intergeneration_time 12483 
- avg intergen_time 49.93 
- best distance 58926.181103
-avg_total_time 2695.76
-cuda_32_1024000
-total generations: 250 
- total intergeneration_time 17001 
- avg intergen_time 68.00 
- best distance 71166.618331
-avg_total_time 3723.40
-cuda_64_1024000
-total generations: 250 
- total intergeneration_time 14766 
- avg intergen_time 59.06 
- best distance 60694.315309
-avg_total_time 3268.83
+ total intergeneration_time 7298 
+ avg intergen_time 29.19 
+ best distance 69691.047154
+avg_total_time 1567.09
 Island_GA_openmp_128
 total generations: 250 
  total intergeneration_time 0 
  avg intergen_time 0 
  best distance 157530.246250
-avg_total_time 0
+avg_total_time 2.00
 Island_GA_openmp_1024
 total generations: 250 
- total intergeneration_time 0 
- avg intergen_time 0 
- best distance 54544.798702
-avg_total_time 15.00
-Island_GA_openmp_8192
-total generations: 250 
- total intergeneration_time 547 
- avg intergen_time 2.18 
- best distance 55015.729789
-avg_total_time 144.20
-Island_GA_openmp_65536
-total generations: 250 
- total intergeneration_time 5689 
- avg intergen_time 22.75 
- best distance 52484.096882
-avg_total_time 1175.00
-Island_GA_openmp_524288
-total generations: 250 
- total intergeneration_time 45052 
- avg intergen_time 180.20 
- best distance 49360.434994
-avg_total_time 9132.60
-Island_GA_openmp_1024000
-total generations: 250 
- total intergeneration_time 87292 
- avg intergen_time 349.16 
- best distance 47017.111927
-avg_total_time 17679.00
+ total intergeneration_time 15 
+ avg intergen_time .06 
+ best distance 57809.851040
+avg_total_time 19.40
 Island_GA_single_core_128
 total generations: 250 
- total intergeneration_time 1 
- avg intergen_time 0 
- best distance 60199.491750
-avg_total_time 34.72
+ total intergeneration_time 50 
+ avg intergen_time .20 
+ best distance 56058.987687
+avg_total_time 43.39
 Island_GA_single_core_1024
 total generations: 250 
- total intergeneration_time 1205 
- avg intergen_time 4.82 
- best distance 56349.732183
-avg_total_time 266.20
-Island_GA_single_core_8192
-total generations: 250 
- total intergeneration_time 10365 
- avg intergen_time 41.46 
- best distance 52036.587243
-avg_total_time 2117.17
-Island_GA_single_core_65536
-total generations: 250 
- total intergeneration_time 83694 
- avg intergen_time 334.77 
- best distance 50442.792427
-avg_total_time 16908.35
-Island_GA_single_core_524288
-total generations: 250 
- total intergeneration_time 674076 
- avg intergen_time 2696.30 
- best distance 49077.323826
-avg_total_time 135950.45
-Island_GA_single_core_1024000
-total generations: 250 
- total intergeneration_time 1312966 
- avg intergen_time 5251.86 
- best distance 47266.646099
-avg_total_time 264812.04
-cuda_32_2048000
-total generations: 125 
- total intergeneration_time 14565 
- avg intergen_time 116.52 
- best distance 72582.326990
-avg_total_time 3613.28
-cuda_64_2048000
-total generations: 125 
- total intergeneration_time 12317 
- avg intergen_time 98.53 
- best distance 71275.519424
-avg_total_time 2942.99
-cuda_32_4096000
-total generations: 125 
- total intergeneration_time 25703 
- avg intergen_time 205.62 
- best distance 65000.922445
-avg_total_time 6005.50
-cuda_64_4096000
-total generations: 125 
- total intergeneration_time 21007 
- avg intergen_time 168.05 
- best distance 72685.012647
-avg_total_time 5092.12
-cuda_32_8192000
-total generations: 125 
- total intergeneration_time 50465 
- avg intergen_time 403.72 
- best distance 66751.304572
-avg_total_time 11768.93
-cuda_64_8192000
-total generations: 125 
- total intergeneration_time 40730 
- avg intergen_time 325.84 
- best distance 65374.849785
-avg_total_time 9861.78
-cuda_32_16384000
-total generations: 125 
- total intergeneration_time 98722 
- avg intergen_time 789.77 
- best distance 60908.167229
-avg_total_time 23131.18
-cuda_64_16384000
-total generations: 125 
- total intergeneration_time 80110 
- avg intergen_time 640.88 
- best distance 66698.318182
-avg_total_time 19516.99
-Island_GA_openmp_2048000
-total generations: 125 
- total intergeneration_time 89096 
- avg intergen_time 712.76 
- best distance 52836.783877
-avg_total_time 18210.00
-Island_GA_openmp_4096000
-total generations: 125 
- total intergeneration_time 180353 
- avg intergen_time 1442.82 
- best distance 49558.493009
-avg_total_time 36827.00
-Island_GA_openmp_8192000
-total generations: 125 
- total intergeneration_time 365128 
- avg intergen_time 2921.02 
- best distance 50231.178273
-avg_total_time 74510.20
-Island_GA_openmp_16384000
-total generations: 125 
- total intergeneration_time 731943 
- avg intergen_time 5855.54 
- best distance 49998.267811
-avg_total_time 149318.00
+ total intergeneration_time 1187 
+ avg intergen_time 4.74 
+ best distance 55877.206552
+avg_total_time 268.68
