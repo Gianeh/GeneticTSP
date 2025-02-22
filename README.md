@@ -33,10 +33,9 @@ This project implements a parallel Genetic Algorithm (GA) to solve (suboptimally
 
 ## Installation and Usage
 ### Prerequisites
-- **Operating System**: Ubuntu 22.04+ or Debian 11+
-- **Compiler**:
-  - GCC (11.4.0 for Ubuntu, 10.2.1 for Debian)
-  - NVCC (CUDA 12.3 for Ubuntu, CUDA 11.8 for Debian)
+- **Compilers**:
+  - GCC
+  - NVCC (Tests were conducted with CUDA 12.3 for Ubuntu)
 - **Libraries**:
   - OpenMP
   - pthreads (optional for CPU versions)
@@ -48,6 +47,7 @@ To run the benchmarks, use the provided test scripts:
 ./run_tests.sh  # Runs standard benchmark tests
 ./further_tests.sh  # Runs extended tests focusing on CUDA and OpenMP
 ```
+Each c, cpp or cuda file can be compiled with a variety of hyperparameter changes using the correct compiler| see #DEFINEs and //comments.
 
 ---
 
